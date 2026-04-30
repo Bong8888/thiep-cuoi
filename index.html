@@ -371,9 +371,26 @@ body {
   display: block;
 }
 @media (min-width: 768px) {
+  .hero-content-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .hero-middle-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    margin-top: 4.7rem;
+  }
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
   .hero-top img {
-    max-width: 80% !important;
-    margin-bottom: 2rem !important;
+    max-width: 65% !important;
+    margin-bottom: 0 !important;
   }
 
   .hero-top {
@@ -382,30 +399,35 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;;
-    padding-bottom: 0rem;
-    transform: translateY(2rem);
-    gap: 0rem; 
+    justify-content: center;
+    padding: 0;
+    transform: none;
+    gap: 0;
     z-index: 2;
   }
   .hero-eyebrow {
-    font-size: 0.9rem; 
-    margin-bottom: 0.5rem; 
+    font-size: 0.75rem;
+    margin-top: 0;
+    margin-bottom: 0.6rem;
   }
   .hero-date {
-    font-size: 1.3rem; 
-    margin-top: 1.5rem; 
-    line-height: 2;
-  }
-  .hero-date-numbers{
-    font-size: 0.9rem; 
-    margin-top: 1.5rem; 
-    line-height: 2;
-  }
-
-  .hero-venue {
     font-size: 0.8rem;
-    margin-top: 2rem;
+    margin-top: 0.8rem;
+    line-height: 2;
+  }
+  .hero-date-numbers {
+    font-size: 0.8rem;
+    margin-top: 0;
+    line-height: 2;
+  }
+  .hero-venue {
+    position: absolute;
+    bottom: 3rem;
+    left: 0;
+    right: 0;
+    font-size: 0.7rem;
+    margin-top: 0;
+    text-align: center;
   }
 }
 /* ===== SECTION 2: COUNTDOWN ===== */
@@ -1029,14 +1051,18 @@ body {
   <div class="hero-cloud-wrap">
     <img src="assets/anlamretreat/converted_image_2.png" alt="clouds"/>
     <div class="hero-top reveal">
-      <p class="hero-eyebrow reveal">We Are Getting Married</p>
-      <img src="assets/anlamretreat/yentv.png" alt="Yen & Tịnh Vân" class="reveal reveal-delay-1" style="max-width:85%;display:block;margin:0 auto 1.2rem;"/>
-      <div class="hero-date reveal reveal-delay-2">
-        <span class="hero-date-august">August</span> <span class="hero-date-numbers">08, 2026</span><br/>
-  AN LAM RETREAT SAIGON RIVER
-</div>
-<div class="hero-venue reveal reveal-delay-2">Venue: Saigon River House</div>
-</div>
+      <div class="hero-content-group">
+        <p class="hero-eyebrow reveal">We Are Getting Married</p>
+        <div class="hero-middle-group">
+          <img src="assets/anlamretreat/yentv.png" alt="Yen & Tịnh Vân" class="reveal reveal-delay-1" style="max-width:85%;display:block;margin:0 auto 1.2rem;"/>
+          <div class="hero-date reveal reveal-delay-2">
+            <span class="hero-date-august">August</span> <span class="hero-date-numbers">08, 2026</span><br/>
+      AN LAM RETREAT SAIGON RIVER
+          </div>
+        </div>
+      </div>
+      <div class="hero-venue reveal reveal-delay-2">Venue: Saigon River House</div>
+    </div>
       </div>
     </div>
   </div>
