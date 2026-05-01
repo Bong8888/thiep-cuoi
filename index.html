@@ -1,1522 +1,1703 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-<title>Yen & Tịnh Vân – Wedding Invitation</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@1,300;1,400;1,500&family=Great+Vibes&family=Josefin+Sans:ital,wght@1,300;1,400&display=swap" rel="stylesheet"/>
-<style>
-@font-face {
-  font-family: 'Sloop';
-  src: url('assets/fonts/Sloop-ScriptThree.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Garamond';
-  src: url('assets/fonts/GaramondPremrPro.otf') format('opentype');
-}
-@font-face {
-  font-family: 'GaramondMed';
-  src: url('assets/fonts/GaramondPremrPro-Med.otf') format('opentype');
-}
-@font-face {
-  font-family: 'GaramondSmbd';
-  src: url('assets/fonts/GaramondPremrPro-Smbd.otf') format('opentype');
-}
-@font-face {
-  font-family: 'BritishGreen';
-  src: url('assets/fonts/1FTV-VIP-British-Green.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'MiracleHistory';
-  src: url('assets/fonts/1FTV-VIP-Miracle-History.otf') format('opentype');
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-/* ===== CURTAIN INTRO ===== */
-#curtain-intro {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: all;
-  cursor: pointer;
-}
-
-.curtain-left, .curtain-right {
-  position: absolute;
-  top: 0;
-  width: 51%;
-  height: 100%;
-  transition: transform 2.4s cubic-bezier(0.45, 0, 0.1, 1);
-  overflow: hidden;
-}
-
-.curtain-left {
-  left: 0;
-  transform-origin: left;
-  background: linear-gradient(105deg,
-    #f0ebe0 0%, #e8e0d0 20%, #f5f0e8 40%,
-    #ede5d5 60%, #f0ebe0 80%, #e5ddd0 100%);
-}
-
-.curtain-right {
-  right: 0;
-  transform-origin: right;
-  background: linear-gradient(75deg,
-    #e5ddd0 0%, #f0ebe0 20%, #ede5d5 40%,
-    #f5f0e8 60%, #e8e0d0 80%, #f0ebe0 100%);
-}
-
-/* Silk fold lines */
-.curtain-left::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    180deg,
-    transparent 0px, transparent 60px,
-    rgba(180,160,130,0.08) 60px, rgba(180,160,130,0.08) 62px
-  );
-}
-.curtain-right::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    180deg,
-    transparent 0px, transparent 60px,
-    rgba(180,160,130,0.08) 60px, rgba(180,160,130,0.08) 62px
-  );
-}
-
-/* Shadow at center seam */
-.curtain-left::after {
-  content: '';
-  position: absolute;
-  top: 0; right: 0;
-  width: 60px; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(150,130,100,0.15));
-}
-.curtain-right::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 60px; height: 100%;
-  background: linear-gradient(90deg, rgba(150,130,100,0.15), transparent);
-}
-
-/* Gold top bar */
-.curtain-top {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 8px;
-  background: linear-gradient(90deg, #c9a96e, #e8d5a3, #b8965e, #e8d5a3, #c9a96e);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-}
-
-/* Swag */
-.curtain-swag {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1001;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  pointer-events: none;
-  transition: opacity 0.8s ease;
-}
-.curtain-swag-bar {
-  width: 60px; height: 8px;
-  background: linear-gradient(90deg, #c9a96e, #e8d5a3, #c9a96e);
-  border-radius: 0 0 4px 4px;
-}
-.curtain-swag-tassel {
-  width: 1.5px; height: 35px;
-  background: linear-gradient(180deg, #e8d5a3, #c9a96e);
-}
-.curtain-swag-ball {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #e8d5a3, #9a7b4f);
-}
-
-/* Center content */
-.curtain-center {
-  position: relative;
-  z-index: 1001;
-  text-align: center;
-  padding: 2rem;
-  pointer-events: none;
-  animation: fadeInUp 1.2s ease forwards;
-}
-
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.curtain-center-names {
-  font-family: 'Sloop', 'Great Vibes', cursive;
-  font-size: clamp(2.8rem, 10vw, 5rem);
-  font-weight: 400;
-  color: var(--gold);
-  margin-bottom: 0.5rem;
-}
-
-.curtain-center-date {
-  font-family: 'GaramondSmbd', Georgia, serif;
-  font-size: 0.65rem;
-  letter-spacing: 5px;
-  text-transform: uppercase;
-  color: var(--green);
-  margin-bottom: 1.5rem;
-}
-
-.curtain-divider {
-  width: 60px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  margin: 0.8rem auto;
-}
-
-.curtain-center-hint {
-  font-family: 'Garamond', Georgia, serif;
-  font-size: 0.82rem;
-  letter-spacing: 2px;
-  color: var(--green);
-  font-style: italic;
-  animation: hintPulse 2.5s ease-in-out infinite;
-  opacity: 0;
-  animation-delay: 1s;
-  animation-fill-mode: forwards;
-}
-
-@keyframes hintPulse {
-  0% { opacity: 0; }
-  30%, 70% { opacity: 0.7; }
-  100% { opacity: 0; }
-}
-
-/* Open state */
-#curtain-intro.open .curtain-left { transform: translateX(-100%); }
-#curtain-intro.open .curtain-right { transform: translateX(100%); }
-#curtain-intro.open .curtain-swag { opacity: 0; transition: opacity 0.2s ease; }
-#curtain-intro.open .curtain-center { opacity: 0; transition: opacity 0.2s ease; }
-#curtain-intro.fading { opacity: 0; transition: opacity 0.5s ease; pointer-events: none; }
-#curtain-intro.hidden { display: none; }
-
-/* ===== PETAL CANVAS ===== */
-#petalCanvas {
-  position: fixed;
-  inset: 0;
-  z-index: 999;
-  pointer-events: none;
-}
-
-:root {
-  --gold: #9B8361;
-  --gold-light: #b8965e;
-  --green: #9B8361;
-  --green-dark: #9B8361;
-  --beige: #f5f2ec;
-  --beige-input: #e8e4da;
-  --text: #9B8361;
-  --white: #ffffff;
-}
-
-html { scroll-behavior: smooth; }
-
-body {
-  background: var(--white);
-  font-family: 'Garamond', Georgia, serif;
-  color: var(--text);
-  overflow-x: hidden;
-  max-width: 680px;
-  margin: 0 auto;
-}
-
-/* ===== SECTION 1: HERO ===== */
-
-.hero {
-  width: 100%;
-  background: var(--white);
-  text-align: center;
-  position: relative;
-}
-
-.hero-venue {
-  font-family: 'Cormorant', Georgia, serif;
-  font-weight: 500;
-  font-size: 0.5rem;
-  color: var(--green);
-  margin-top: 1.3rem;
-  letter-spacing: 0.75px;
-  text-transform: uppercase;
-}
-.hero-cloud-wrap {
-  position: relative;
-  width: 100%;
-  margin-top: -2rem;
-}
-
-.hero-cloud-wrap img {
-  width: 100%;
-  display: block;
-}
-
-.hero-top {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 2rem 2rem 2rem;
-  z-index: 2;
-}
-
-.hero-illustration {
-  width: 100%;
-  display: block;
-}
-
-.hero-illustration img {
-  width: 100%;
-  display: block;
-}
-
-.cloud-tl, .cloud-tr, .cloud-bl, .cloud-br {
-  position: absolute;
-  width: 220px;
-  opacity: 0.7;
-  pointer-events: none;
-  z-index: 1;
-}
-.cloud-tl { top: 0; left: 0; }
-.cloud-tr { top: 0; right: 0; }
-.cloud-bl { bottom: 60px; left: 0; }
-.cloud-br { bottom: 60px; right: 0; }
-
-.hero-eyebrow {
-  font-family: 'cormorant', Georgia, serif;
-  font-size: 0.65rem;
-  font-weight: 500;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 1rem;
-  margin-top: -5rem;
-}
-
-.hero-names {
-  font-family: 'Sloop', 'Great Vibes', cursive;
-  font-size: clamp(3.5rem, 12vw, 5.5rem);
-  font-weight: 400;
-  color: #6A4834;
-  line-height: 1.1;
-  margin-bottom: 1.2rem;
-}
-
-.hero-date {
-  font-family: 'Cormorant', Georgia, serif;
-  font-weight: 500;
-  font-size: 0.65rem;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--green);
-  line-height: 1.25;
-}
-
-.hero-date-august {
-  font-family: 'Cormorant', Georgia, serif;
-  font-weight: 500;
-  font-size: 0.65rem;
-  letter-spacing: 0.75px;
-  text-transform: uppercase;
-  color: var(--green);
-  vertical-align: baseline;
-}
-
-.hero-date-numbers {
-  font-family: 'Garamond', Georgia, serif; 
-  font-weight: 500;
-  font-size: 0.65rem;
-  letter-spacing: 0.75px;
-  text-transform: uppercase;
-  color: var(--green);
-  vertical-align: baseline;
-}
-
-.hero-divider {
-  width: 60%;
-  height: 1px;
-  background: var(--green);
-  margin: 1.5rem auto 0;
-  opacity: 0.4;
-}
-
-.hero-illustration {
-  width: 100%;
-  display: block;
-  margin-top: 0;
-}
-
-.hero-illustration img {
-  width: 100%;
-  display: block;
-}
-@media (min-width: 768px) {
-  .hero-top img {
-    max-width: 80% !important;
-    margin-bottom: 2rem !important;
-  }
-
-  .hero-top {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;;
-    padding-bottom: 0rem;
-    transform: translateY(2rem);
-    gap: 0rem; 
-    z-index: 2;
-  }
-  .hero-eyebrow {
-    font-size: 0.9rem; 
-    margin-bottom: 0.5rem; 
-  }
-  .hero-date {
-    font-size: 1.3rem; 
-    margin-top: 1.5rem; 
-    line-height: 2;
-  }
-  .hero-date-numbers{
-    font-size: 0.9rem; 
-    margin-top: 1.5rem; 
-    line-height: 2;
-  }
-
-  .hero-venue {
-    font-size: 0.8rem;
-    margin-top: 2rem;
-  }
-}
-/* ===== SECTION 2: COUNTDOWN ===== */
-.countdown .section-title-script {
-  margin-bottom: 0;
-}
-.countdown {
-  padding: 4rem 2rem;
-  text-align: center;
-  background: var(--white);
-}
-
-.section-title-script {
-  font-family: 'MiracleHistory', cursive;
-  font-size: clamp(2.5rem, 8vw, 3.5rem);
-  font-weight: 400;
-  font-style: normal;
-  color: #6A4834;
-  margin-bottom: 0.8rem;
-}
-
-.countdown-desc {
-  font-family: 'Garamond', Georgia, serif;
-  font-size: 0.88rem;
-  color: var(--green);
-  line-height: 1.1;
-  max-width: 480px;
-  margin: 0.5rem auto 2.5rem;
-  font-style: normal;
-  padding: 0 1.5rem;
-}
-
-.countdown-wrap {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  flex-wrap: nowrap;
-}
-
-.cd-box { text-align: center; }
-
-.cd-num {
-  font-family: 'Garamond', Georgia, serif;
-  font-size: clamp(2rem, 7.5vw, 4.5rem);
-  color: var(--green-dark);
-  line-height: 1;
-  display: block;
-}
-
-.cd-label {
-  font-family: 'cormorant', Georgia, serif;
-  font-size: clamp(0.75rem, 2vw, 1.3rem);
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--green);
-  margin-top: 0.4rem;
-  display: block;
-}
-
-/* ===== SECTION 3: ORDER OF THE DAY ===== */
-.order {
-  padding: 4rem 2rem;
-  text-align: center;
-  background: var(--white);
-  position: relative;
-  overflow: hidden;
-}
-@media (min-width: 768px) {
-  .order-subtitle {
-    margin-top: -1.5rem;
-  }
-}
-.order-subtitle {
-  font-family: 'Cormorant', Georgia, serif;
-  font-weight: 500; 
-  font-size: 0.8rem;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--green);
-  margin-top: -1rem;
-  margin-bottom: 3rem;
-}
-
-.order-flower-left {
-  position: absolute;
-  left: -80px;
-  top: 220px;
-  width: 240px;
-  opacity: 0.85;
-  transform: rotate(20deg);
-}
-
-.order-flower-right {
-  position: absolute;
-  right: -30px;
-  top: 65%;
-  width: 180px;
-  opacity: 0.85;
-  transform: scaleX(-1) rotate(15deg);
-}
-
-@media (max-width: 480px) {
-  .order-flower-left {
-    width: 140px;
-    left: -50px;
-    top: 280px;
-  }
-  .order-flower-right {
-    width: 110px;
-    right: -20px;
-  }
-}
-
-.timeline {
-  position: relative;
-  max-width: 500px;
-  margin: 0 auto;
-}
-
-.timeline-item {
-  position: relative;
-  padding-bottom: 0;
-  text-align: center;
-}
-
-.timeline-connector {
-  width: 1px;
-  height: 60px;
-  background: var(--green);
-  opacity: 0.35;
-  margin: 1rem auto;
-}
-
-.timeline-time {
-  font-family: 'GaramondSmbd', Georgia, serif;
-  font-size: 0.85rem;
-  letter-spacing: 2px;
-  color: var(--green);
-  text-transform: none;
-  margin-bottom: 0.3rem;
-}
-
-.timeline-event {
-  font-family: 'cormorant', Georgia, serif;
-  font-weight: 500;
-  font-size: 1rem;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: #9a7b4f;
-  font-weight: 400;
-  margin-bottom: 0.15rem;
-}
-
-.timeline-desc {
-  font-family: 'Garamond', Georgia, serif;
-  font-size: clamp(0.6rem, 2vw, 0.75rem);
-  letter-spacing: 0.75px;
-  text-transform: uppercase;
-  color: var(--green);
-  font-style: normal;
-}
-
-/* ===== SECTION 4: DRESSCODE ===== */
-.dresscode {
-  padding: 0 2rem 4rem;
-  text-align: center;
-  background: var(--white);
-}
-
-.dresscode-boat {
-  width: 100%;
-  max-width: 500px;
-  display: block;
-  margin: 0 auto 3rem;
-  opacity: 0.85;
-}
-
-.dresscode-colors {
-  font-family: 'cormorant', Georgia, serif;
-  font-size: 0.7rem;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--green);
-  margin-bottom: 0.5rem;
-}
-.dresscode-people {
-  width: 60%;
-  display: block;
-  margin: 1rem auto 1rem;
-  opacity: 0.85;
-}
-
-@media (max-width: 480px) {
-  .dresscode-people {
-    width: 75%;
-    margin: 1rem auto 1rem;
-  }
-}
-
-.dresscode-formal {
-  font-family: 'cormorant', Georgia, serif;
-  font-weight: 500;
-  font-size: 1rem;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--green-dark);
-  margin-bottom: 1.75rem;
-}
-
-.dresscode-note {
-  font-family: 'Garamond', Georgia, serif;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  color: var(--green);
-  font-style: normal;
-  line-height: 1.3;
-  padding: 0 1.5rem;
-}
-
-/* ===== SECTION 5: GIFT ===== */
-.gift {
-  padding: 4rem 2rem;
-  text-align: center;
-  background: var(--white);
-}
-
-.gift-text {
-  font-family: 'GaramondSmbd', Georgia, serif;
-  font-size: 0.75rem;
-  letter-spacing: 1px;
-  color: var(--green-dark);
-  line-height: 1.7;
-  max-width: 460px;
-  margin: 1rem auto 0;
-  text-transform: uppercase;
-}
-.gift-note {
-  font-family: 'Garamond', Georgia, serif;
-  font-size: 0.75rem;
-  letter-spacing: 1px;
-  color: var(--green-dark);
-  line-height: 1.4; 
-  max-width: 460px;
-  margin: 0 auto 1.5rem;
-  text-transform: uppercase;
-  padding: 0 1.5rem;
-}
-.gift-flower {
-  width: 100%;
-  display: block;
-  margin: 0 auto 3rem;
-  opacity: 0.85;
-}
-
-/* ===== SECTION 5b: TRAVEL & ACCOMMODATION ===== */
-
-.travel {
-  padding: 0 2rem 4rem;
-  text-align: center;
-  background: var(--white);
-}
-
-.travel-subtitle {
-  font-family: 'cormorant', Georgia, serif;
-  font-weight: 500;
-  font-size: 0.75rem;
-  letter-spacing: 0.75px;
-  text-transform: uppercase;
-  color: var(--green);
-  margin-bottom: 2.5rem;
-  padding: 0 1.5rem;
-}
-
-.travel-block {
-  margin-bottom: 2rem;
-}
-
-.travel-heading {
-  font-family: 'cormorant', Georgia, serif;
-  font-size: 1rem;
-  letter-spacing: 0.75px;
-  text-transform: uppercase;
-  color: var(--green-dark);
-  margin-bottom: 1.3rem;
-}
-
-.travel-body {
-  font-family: 'Garamond', Georgia, serif;
-  font-size: 0.85rem;
-  color: var(--green);
-  line-height: 1.3;
-  font-style: normal;
-  padding: 0rem 1.5rem;
-  margin-bottom: 5rem
-}
-
-.travel-body strong {
-  font-family: 'GaramondSmbd', Georgia, serif;
-  font-style: normal;
-  color: var(--green-dark);
-}
-
-.travel-body a {
-  color: var(--gold);
-  text-decoration: none;
-  font-family: 'GaramondMed', Georgia, serif;
-}
-
-/* ===== SECTION 6: WEATHER / TRAVEL INFO ===== */
-.travel-info {
-  padding: 0 2rem 4rem;
-  text-align: center;
-  background: var(--white);
-}
-
-.weather-img {
-  width: 100%;
-  display: block;
-  margin: 0rem auto 4rem;
-  opacity: 0.85;
-}
-
-/* ===== SECTION 7: HOTELS ===== */
-.hotels {
-  padding: 0 2rem 4rem;
-  text-align: center;
-  background: var(--white);
-}
-
-.hotels-grid {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: nowrap;
-  margin-bottom: 1.5rem;
-}
-
-.hotel-item { text-align: center; flex: 1; min-width: 0; max-width: 33%; }
-
-.hotel-item img {
-  width: 80%;
-  opacity: 0.85;
-  display: block;
-  margin: 0 auto 0.6rem;
-}
-
-.hotel-name {
-  font-family: 'GaramondSmbd', Georgia, serif;
-  font-size: 0.6rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--green-dark);
-  line-height: 1.5;
-}
-
-/* ===== CITY GUIDE ===== */
-.city-guide {
-  padding: 0 2rem 4rem;
-  background: var(--white);
-  letter-spacing: 1px;
-}
-
-.city-guide-title {
-  font-family: 'cormorant', Georgia, serif;
-  font-size: 0.9rem;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--gold);
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.city-guide {
-  padding: 0 2rem 4rem;
-  background: var(--white);
-  text-align: center;
-}
-
-.guide-list {
-  list-style: none;
-  max-width: 380px;
-  padding: 0;
-  margin: 0 auto;
-  text-align: left;
-  display: inline-block;
-}
-
-.guide-category {
-  margin-bottom: 2.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.guide-cat-title {
-  font-family: 'GaramondSmbd', Georgia, serif;
-  font-size: 0.92rem;
-  color: var(--gold);
-  font-style: normal;
-  margin-bottom: 0.8rem;
-  width: 100%; 
-  max-width: 300px;
-  text-align: center;
-}
-
-.guide-sub-list {
-  list-style: none;
-  padding: 0;
-  margin: 0 auto; 
-  width: 100%;
-  max-width: 360px; 
-  text-align: left;
-}
-
-.guide-sub-list li {
-  font-family: 'Garamond', Georgia, serif;
-  font-size: 0.88rem;
-  color: var(--green);
-  line-height: 1.5;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  white-space: normal; 
-  margin-bottom: 0.15rem; 
-}
-.guide-sub-list li::before {
-  content: '•';
-  color: var(--beige-input);
-  font-size: 1.4rem;
-  flex-shrink: 0;
-  line-height: 0.5;
-  margin-top: -0.2rem;
-}
-
-/* ===== SECTION 8: RSVP ===== */
-.rsvp {
-  padding: 4rem 2rem;
-  text-align: center;
-  background: var(--white);
-}
-
-.rsvp-subtitle {
-  font-family: 'cormorant', Georgia, serif;
-  font-size: 0.85rem;
-  font-weight: 500;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--green);
-  margin-bottom: 0.5rem;
-}
-.rsvp-note {
-  font-family: 'Garamond', Georgia, serif;
-  font-weight: 500;
-  font-size: 0.85rem;
-  color: var(--green);
-  margin-top: 0;
-  margin-bottom: 4rem;
-  letter-spacing: 1px;
-}
-.rsvp-form {
-  max-width: 520px;
-  margin: 0 auto;
-  text-align: left;
-}
-
-.form-group { margin-bottom: 1.4rem; }
-
-.form-label {
-  display: block;
-  font-family: 'Garamond', Georgia, serif;
-  font-size: 0.82rem;
-  color: var(--green-dark);
-  margin-bottom: 0.4rem;
-  font-style: normal;
-}
-
-.form-input, .form-textarea {
-  width: 100%;
-  background: var(--beige-input);
-  border: none;
-  border-radius: 4px;
-  padding: 0.75rem 1rem;
-  font-family: 'Garamond', Georgia, serif;
-  font-size: 0.85rem;
-  color: var(--text);
-  outline: none;
-}
-
-.form-input::placeholder, .form-textarea::placeholder {
-  color: #aaa;
-  font-style: normal;
-}
-
-.radio-group {
-  display: flex;
-  gap: 2rem;
-  margin-top: 0.4rem;
-}
-
-.radio-label {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: 'Garamond', Georgia, serif;
-  font-size: 0.85rem;
-  color: var(--green-dark);
-  font-style: normal;
-  cursor: pointer;
-}
-
-.radio-label input[type="radio"] {
-  accent-color: var(--gold);
-  width: 16px;
-  height: 16px;
-}
-
-.btn-rsvp {
-  width: 100%;
-   background: #6A4834;
-  color: var(--white);
-  border: none;
-  padding: 1rem;
-  font-family: 'GaramondSmbd', Georgia, serif;
-  font-size: 0.85rem;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  cursor: pointer;
-  margin-top: 1rem;
-  border-radius: 2px;
-  transition: background 0.2s;
-}
-
-.btn-rsvp:hover { background: var(--green); }
-
-/* ===== SECTION 9: CONTACT ===== */
-.contact {
-  padding: 4rem 2rem;
-  text-align: center;
-  background: var(--white);
-}
-.contact .section-title-script {
-  margin-bottom: 0;
-}
-.contact-subtitle {
-  font-family: 'cormorant', Georgia, serif;
-  font-size: 0.85rem;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--green);
-  margin-bottom: 2rem;
-  margin-top: 0.2rem;
-}
-
-.contact-body {
-  font-family: 'Garamond', Georgia, serif;
-  font-size: 0.85rem;
-  color: var(--green);
-  line-height: 1.2;
-  font-style: normal;
-  margin-bottom: 1.5rem;
-  padding: 0 1.5rem;
-}
-
-.contact-detail {
-  font-family: 'GaramondSmbd', Georgia, serif;
-  font-size: 0.82rem;
-  color: var(--green-dark);
-  line-height: 2.2;
-  letter-spacing: 0.5px;
-}
-
-.contact-flower {
-  width: 100%;
-  display: block;
-  margin: 2.5rem auto 0;
-  opacity: 0.85;
-}
-
-/* ===== SCROLL REVEAL ===== */
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-.reveal-delay-1 { transition-delay: 0.15s; }
-.reveal-delay-2 { transition-delay: 0.3s; }
-.reveal-delay-3 { transition-delay: 0.45s; }
-.reveal-left {
-  opacity: 0;
-  transform: translateX(-30px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-.reveal-left.visible { opacity: 1; transform: translateX(0); }
-.reveal-right {
-  opacity: 0;
-  transform: translateX(30px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-.reveal-right.visible { opacity: 1; transform: translateX(0); }
-.section-divider { display: none; }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Yen & Tịnh Vân – Wedding Invitation</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@1,300;1,400;1,500&family=Great+Vibes&family=Josefin+Sans:ital,wght@1,300;1,400&display=swap"
+    rel="stylesheet" />
+  <style>
+    @font-face {
+      font-family: 'Sloop';
+      src: url('assets/fonts/Sloop-ScriptThree.ttf') format('truetype');
+    }
+
+    @font-face {
+      font-family: 'Garamond';
+      src: url('assets/fonts/GaramondPremrPro.otf') format('opentype');
+    }
+
+    @font-face {
+      font-family: 'GaramondMed';
+      src: url('assets/fonts/GaramondPremrPro-Med.otf') format('opentype');
+    }
+
+    @font-face {
+      font-family: 'GaramondSmbd';
+      src: url('assets/fonts/GaramondPremrPro-Smbd.otf') format('opentype');
+    }
+
+    @font-face {
+      font-family: 'BritishGreen';
+      src: url('assets/fonts/1FTV-VIP-British-Green.ttf') format('truetype');
+    }
+
+    @font-face {
+      font-family: 'MiracleHistory';
+      src: url('assets/fonts/1FTV-VIP-Miracle-History.otf') format('opentype');
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* ===== CURTAIN INTRO ===== */
+    #curtain-intro {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: all;
+      cursor: pointer;
+    }
+
+    .curtain-left,
+    .curtain-right {
+      position: absolute;
+      top: 0;
+      width: 51%;
+      height: 100%;
+      transition: transform 2.4s cubic-bezier(0.45, 0, 0.1, 1);
+      overflow: hidden;
+    }
+
+    .curtain-left {
+      left: 0;
+      transform-origin: left;
+      background: linear-gradient(105deg,
+          #f0ebe0 0%, #e8e0d0 20%, #f5f0e8 40%,
+          #ede5d5 60%, #f0ebe0 80%, #e5ddd0 100%);
+    }
+
+    .curtain-right {
+      right: 0;
+      transform-origin: right;
+      background: linear-gradient(75deg,
+          #e5ddd0 0%, #f0ebe0 20%, #ede5d5 40%,
+          #f5f0e8 60%, #e8e0d0 80%, #f0ebe0 100%);
+    }
+
+    /* Silk fold lines */
+    .curtain-left::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(180deg,
+          transparent 0px, transparent 60px,
+          rgba(180, 160, 130, 0.08) 60px, rgba(180, 160, 130, 0.08) 62px);
+    }
+
+    .curtain-right::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(180deg,
+          transparent 0px, transparent 60px,
+          rgba(180, 160, 130, 0.08) 60px, rgba(180, 160, 130, 0.08) 62px);
+    }
+
+    /* Shadow at center seam */
+    .curtain-left::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 60px;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(150, 130, 100, 0.15));
+    }
+
+    .curtain-right::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 60px;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(150, 130, 100, 0.15), transparent);
+    }
+
+    /* Gold top bar */
+    .curtain-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 8px;
+      background: linear-gradient(90deg, #c9a96e, #e8d5a3, #b8965e, #e8d5a3, #c9a96e);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Swag */
+    .curtain-swag {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1001;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      pointer-events: none;
+      transition: opacity 0.8s ease;
+    }
+
+    .curtain-swag-bar {
+      width: 60px;
+      height: 8px;
+      background: linear-gradient(90deg, #c9a96e, #e8d5a3, #c9a96e);
+      border-radius: 0 0 4px 4px;
+    }
+
+    .curtain-swag-tassel {
+      width: 1.5px;
+      height: 35px;
+      background: linear-gradient(180deg, #e8d5a3, #c9a96e);
+    }
+
+    .curtain-swag-ball {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #e8d5a3, #9a7b4f);
+    }
+
+    /* Center content */
+    .curtain-center {
+      position: relative;
+      z-index: 1001;
+      text-align: center;
+      padding: 2rem;
+      pointer-events: none;
+      animation: fadeInUp 1.2s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .curtain-center-names {
+      font-family: 'Sloop', 'Great Vibes', cursive;
+      font-size: clamp(2.8rem, 10vw, 5rem);
+      font-weight: 400;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .curtain-center-date {
+      font-family: 'GaramondSmbd', Georgia, serif;
+      font-size: 0.65rem;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 1.5rem;
+    }
+
+    .curtain-divider {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0.8rem auto;
+    }
+
+    .curtain-center-hint {
+      font-family: 'Garamond', Georgia, serif;
+      font-size: 0.82rem;
+      letter-spacing: 2px;
+      color: var(--green);
+      font-style: italic;
+      animation: hintPulse 2.5s ease-in-out infinite;
+      opacity: 0;
+      animation-delay: 1s;
+      animation-fill-mode: forwards;
+    }
+
+    @keyframes hintPulse {
+      0% {
+        opacity: 0;
+      }
+
+      30%,
+      70% {
+        opacity: 0.7;
+      }
+
+      100% {
+        opacity: 0;
+      }
+    }
+
+    /* Open state */
+    #curtain-intro.open .curtain-left {
+      transform: translateX(-100%);
+    }
+
+    #curtain-intro.open .curtain-right {
+      transform: translateX(100%);
+    }
+
+    #curtain-intro.open .curtain-swag {
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    #curtain-intro.open .curtain-center {
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    #curtain-intro.fading {
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
+
+    #curtain-intro.hidden {
+      display: none;
+    }
+
+    /* ===== PETAL CANVAS ===== */
+    #petalCanvas {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      pointer-events: none;
+    }
+
+    :root {
+      --gold: #9B8361;
+      --gold-light: #b8965e;
+      --green: #9B8361;
+      --green-dark: #9B8361;
+      --beige: #f5f2ec;
+      --beige-input: #e8e4da;
+      --text: #9B8361;
+      --white: #ffffff;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--white);
+      font-family: 'Garamond', Georgia, serif;
+      color: var(--text);
+      overflow-x: hidden;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* ===== SECTION 1: HERO ===== */
+
+    .hero {
+      width: 100%;
+      background: var(--white);
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-venue {
+      font-family: 'Cormorant', Georgia, serif;
+      font-weight: 500;
+      font-size: 0.5rem;
+      color: var(--green);
+      margin-top: 1.3rem;
+      letter-spacing: 0.75px;
+      text-transform: uppercase;
+    }
+
+    .hero-cloud-wrap {
+      position: relative;
+      width: 100%;
+      margin-top: -2rem;
+    }
+
+    .hero-cloud-wrap img {
+      width: 100%;
+      display: block;
+    }
+
+    .hero-top {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 2rem 2rem 2rem;
+      z-index: 2;
+    }
+
+    .hero-illustration {
+      width: 100%;
+      display: block;
+    }
+
+    .hero-illustration img {
+      width: 100%;
+      display: block;
+    }
+
+    .cloud-tl,
+    .cloud-tr,
+    .cloud-bl,
+    .cloud-br {
+      position: absolute;
+      width: 220px;
+      opacity: 0.7;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .cloud-tl {
+      top: 0;
+      left: 0;
+    }
+
+    .cloud-tr {
+      top: 0;
+      right: 0;
+    }
+
+    .cloud-bl {
+      bottom: 60px;
+      left: 0;
+    }
+
+    .cloud-br {
+      bottom: 60px;
+      right: 0;
+    }
+
+    .hero-eyebrow {
+      font-family: 'cormorant', Georgia, serif;
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      margin-top: -5rem;
+    }
+
+    .hero-names {
+      font-family: 'Sloop', 'Great Vibes', cursive;
+      font-size: clamp(3.5rem, 12vw, 5.5rem);
+      font-weight: 400;
+      color: #6A4834;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-date {
+      font-family: 'Cormorant', Georgia, serif;
+      font-weight: 500;
+      font-size: 0.65rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--green);
+      line-height: 1.25;
+    }
+
+    .hero-date-august {
+      font-family: 'Cormorant', Georgia, serif;
+      font-weight: 500;
+      font-size: 0.65rem;
+      letter-spacing: 0.75px;
+      text-transform: uppercase;
+      color: var(--green);
+      vertical-align: baseline;
+    }
+
+    .hero-date-numbers {
+      font-family: 'Garamond', Georgia, serif;
+      font-weight: 500;
+      font-size: 0.65rem;
+      letter-spacing: 0.75px;
+      text-transform: uppercase;
+      color: var(--green);
+      vertical-align: baseline;
+    }
+
+    .hero-divider {
+      width: 60%;
+      height: 1px;
+      background: var(--green);
+      margin: 1.5rem auto 0;
+      opacity: 0.4;
+    }
+
+    .hero-illustration {
+      width: 100%;
+      display: block;
+      margin-top: 0;
+    }
+
+    .hero-illustration img {
+      width: 100%;
+      display: block;
+    }
+
+    @media (min-width: 768px) {
+      .hero-content-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .hero-middle-group {
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+        margin-top: 4.7rem;
+      }
+
+
+
+      .hero-top img {
+        max-width: 65% !important;
+        margin-bottom: 0 !important;
+      }
+
+      .hero-top {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        transform: none;
+        gap: 0;
+        z-index: 2;
+      }
+
+      .hero-eyebrow {
+        font-size: 0.75rem;
+        margin-top: 5rem;
+        margin-bottom: 0.6rem;
+      }
+
+      .hero-date {
+        font-size: 0.8rem;
+        margin-top: 0.8rem;
+        line-height: 1.3;
+      }
+
+      .hero-date-numbers {
+        font-size: 0.8rem;
+        margin-top: 0;
+        line-height: 2;
+      }
+
+      .hero-date-august {
+        font-size: 0.8rem;
+      }
+
+      .hero-venue {
+        position: absolute;
+        bottom: 3rem;
+        left: 0;
+        right: 0;
+        font-size: 0.8rem;
+        margin-top: 0;
+        text-align: center;
+      }
+    }
+
+    /* ===== SECTION 2: COUNTDOWN ===== */
+    .countdown .section-title-script {
+      margin-bottom: 0;
+    }
+
+    .countdown {
+      padding: 4rem 2rem;
+      text-align: center;
+      background: var(--white);
+    }
+
+    .section-title-script {
+      font-family: 'MiracleHistory', cursive;
+      font-size: clamp(2.5rem, 8vw, 3.5rem);
+      font-weight: 400;
+      font-style: normal;
+      color: #6A4834;
+      margin-bottom: 0.8rem;
+    }
+
+    .countdown-desc {
+      font-family: 'Garamond', Georgia, serif;
+      font-size: 0.88rem;
+      color: var(--green);
+      line-height: 1.1;
+      max-width: 480px;
+      margin: 0.5rem auto 2.5rem;
+      font-style: normal;
+      padding: 0 1.5rem;
+    }
+
+    .countdown-wrap {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: nowrap;
+    }
+
+    .cd-box {
+      text-align: center;
+    }
+
+    .cd-num {
+      font-family: 'Garamond', Georgia, serif;
+      font-size: clamp(2rem, 7.5vw, 4.5rem);
+      color: var(--green-dark);
+      line-height: 1;
+      display: block;
+    }
+
+    .cd-label {
+      font-family: 'cormorant', Georgia, serif;
+      font-size: clamp(0.75rem, 2vw, 1.3rem);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-top: 0.4rem;
+      display: block;
+    }
+
+    /* ===== SECTION 3: ORDER OF THE DAY ===== */
+    .order {
+      padding: 4rem 2rem;
+      text-align: center;
+      background: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (min-width: 768px) {
+      .order-subtitle {
+        margin-top: -1.5rem;
+      }
+    }
+
+    .order-subtitle {
+      font-family: 'Cormorant', Georgia, serif;
+      font-weight: 500;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-top: -1rem;
+      margin-bottom: 3rem;
+    }
+
+    .order-flower-left {
+      position: absolute;
+      left: -80px;
+      top: 220px;
+      width: 240px;
+      opacity: 0.85;
+      transform: rotate(20deg);
+    }
+
+    .order-flower-right {
+      position: absolute;
+      right: -30px;
+      top: 65%;
+      width: 180px;
+      opacity: 0.85;
+      transform: scaleX(-1) rotate(15deg);
+    }
+
+    @media (max-width: 480px) {
+      .order-flower-left {
+        width: 140px;
+        left: -50px;
+        top: 280px;
+      }
+
+      .order-flower-right {
+        width: 110px;
+        right: -20px;
+      }
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 0;
+      text-align: center;
+    }
+
+    .timeline-connector {
+      width: 1px;
+      height: 60px;
+      background: var(--green);
+      opacity: 0.35;
+      margin: 1rem auto;
+    }
+
+    .timeline-time {
+      font-family: 'GaramondSmbd', Georgia, serif;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      color: var(--green);
+      text-transform: none;
+      margin-bottom: 0.3rem;
+    }
+
+    .timeline-event {
+      font-family: 'cormorant', Georgia, serif;
+      font-weight: 500;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #9a7b4f;
+      font-weight: 400;
+      margin-bottom: 0.15rem;
+    }
+
+    .timeline-desc {
+      font-family: 'Garamond', Georgia, serif;
+      font-size: clamp(0.6rem, 2vw, 0.75rem);
+      letter-spacing: 0.75px;
+      text-transform: uppercase;
+      color: var(--green);
+      font-style: normal;
+    }
+
+    /* ===== SECTION 4: DRESSCODE ===== */
+    .dresscode {
+      padding: 0 2rem 4rem;
+      text-align: center;
+      background: var(--white);
+    }
+
+    .dresscode-boat {
+      width: 100%;
+      max-width: 500px;
+      display: block;
+      margin: 0 auto 3rem;
+      opacity: 0.85;
+    }
+
+    .dresscode-colors {
+      font-family: 'cormorant', Georgia, serif;
+      font-size: 0.7rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 0.5rem;
+    }
+
+    .dresscode-people {
+      width: 60%;
+      display: block;
+      margin: 1rem auto 1rem;
+      opacity: 0.85;
+    }
+
+    @media (max-width: 480px) {
+      .dresscode-people {
+        width: 75%;
+        margin: 1rem auto 1rem;
+      }
+    }
+
+    .dresscode-formal {
+      font-family: 'cormorant', Georgia, serif;
+      font-weight: 500;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--green-dark);
+      margin-bottom: 1.75rem;
+    }
+
+    .dresscode-note {
+      font-family: 'Garamond', Georgia, serif;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: var(--green);
+      font-style: normal;
+      line-height: 1.3;
+      padding: 0 1.5rem;
+    }
+
+    /* ===== SECTION 5: GIFT ===== */
+    .gift {
+      padding: 4rem 2rem;
+      text-align: center;
+      background: var(--white);
+    }
+
+    .gift-text {
+      font-family: 'GaramondSmbd', Georgia, serif;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      color: var(--green-dark);
+      line-height: 1.7;
+      max-width: 460px;
+      margin: 1rem auto 0;
+      text-transform: uppercase;
+    }
+
+    .gift-note {
+      font-family: 'Garamond', Georgia, serif;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      color: var(--green-dark);
+      line-height: 1.4;
+      max-width: 460px;
+      margin: 0 auto 1.5rem;
+      text-transform: uppercase;
+      padding: 0 1.5rem;
+    }
+
+    .gift-flower {
+      width: 100%;
+      display: block;
+      margin: 0 auto 3rem;
+      opacity: 0.85;
+    }
+
+    /* ===== SECTION 5b: TRAVEL & ACCOMMODATION ===== */
+
+    .travel {
+      padding: 0 2rem 4rem;
+      text-align: center;
+      background: var(--white);
+    }
+
+    .travel-subtitle {
+      font-family: 'cormorant', Georgia, serif;
+      font-weight: 500;
+      font-size: 0.75rem;
+      letter-spacing: 0.75px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 2.5rem;
+      padding: 0 1.5rem;
+    }
+
+    .travel-block {
+      margin-bottom: 2rem;
+    }
+
+    .travel-heading {
+      font-family: 'cormorant', Georgia, serif;
+      font-size: 1rem;
+      letter-spacing: 0.75px;
+      text-transform: uppercase;
+      color: var(--green-dark);
+      margin-bottom: 1.3rem;
+    }
+
+    .travel-body {
+      font-family: 'Garamond', Georgia, serif;
+      font-size: 0.85rem;
+      color: var(--green);
+      line-height: 1.3;
+      font-style: normal;
+      padding: 0rem 1.5rem;
+      margin-bottom: 5rem
+    }
+
+    .travel-body strong {
+      font-family: 'GaramondSmbd', Georgia, serif;
+      font-style: normal;
+      color: var(--green-dark);
+    }
+
+    .travel-body a {
+      color: var(--gold);
+      text-decoration: none;
+      font-family: 'GaramondMed', Georgia, serif;
+    }
+
+    /* ===== SECTION 6: WEATHER / TRAVEL INFO ===== */
+    .travel-info {
+      padding: 0 2rem 4rem;
+      text-align: center;
+      background: var(--white);
+    }
+
+    .weather-img {
+      width: 100%;
+      display: block;
+      margin: 0rem auto 4rem;
+      opacity: 0.85;
+    }
+
+    /* ===== SECTION 7: HOTELS ===== */
+    .hotels {
+      padding: 0 2rem 4rem;
+      text-align: center;
+      background: var(--white);
+    }
+
+    .hotels-grid {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: nowrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .hotel-item {
+      text-align: center;
+      flex: 1;
+      min-width: 0;
+      max-width: 33%;
+    }
+
+    .hotel-item img {
+      width: 80%;
+      opacity: 0.85;
+      display: block;
+      margin: 0 auto 0.6rem;
+    }
+
+    .hotel-name {
+      font-family: 'GaramondSmbd', Georgia, serif;
+      font-size: 0.6rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--green-dark);
+      line-height: 1.5;
+    }
+
+    /* ===== CITY GUIDE ===== */
+    .city-guide {
+      padding: 0 2rem 4rem;
+      background: var(--white);
+      letter-spacing: 1px;
+    }
+
+    .city-guide-title {
+      font-family: 'cormorant', Georgia, serif;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .city-guide {
+      padding: 0 2rem 4rem;
+      background: var(--white);
+      text-align: center;
+    }
+
+    .guide-list {
+      list-style: none;
+      max-width: 380px;
+      padding: 0;
+      margin: 0 auto;
+      text-align: left;
+      display: inline-block;
+    }
+
+    .guide-category {
+      margin-bottom: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .guide-cat-title {
+      font-family: 'GaramondSmbd', Georgia, serif;
+      font-size: 0.92rem;
+      color: var(--gold);
+      font-style: normal;
+      margin-bottom: 0.8rem;
+      width: 100%;
+      max-width: 300px;
+      text-align: center;
+    }
+
+    .guide-sub-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto;
+      width: 100%;
+      max-width: 360px;
+      text-align: left;
+    }
+
+    .guide-sub-list li {
+      font-family: 'Garamond', Georgia, serif;
+      font-size: 0.88rem;
+      color: var(--green);
+      line-height: 1.5;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      white-space: normal;
+      margin-bottom: 0.15rem;
+    }
+
+    .guide-sub-list li::before {
+      content: '•';
+      color: var(--beige-input);
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      line-height: 0.5;
+      margin-top: -0.2rem;
+    }
+
+    /* ===== SECTION 8: RSVP ===== */
+    .rsvp {
+      padding: 4rem 2rem;
+      text-align: center;
+      background: var(--white);
+    }
+
+    .rsvp-subtitle {
+      font-family: 'cormorant', Georgia, serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 0.5rem;
+    }
+
+    .rsvp-note {
+      font-family: 'Garamond', Georgia, serif;
+      font-weight: 500;
+      font-size: 0.85rem;
+      color: var(--green);
+      margin-top: 0;
+      margin-bottom: 4rem;
+      letter-spacing: 1px;
+    }
+
+    .rsvp-form {
+      max-width: 520px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .form-group {
+      margin-bottom: 1.4rem;
+    }
+
+    .form-label {
+      display: block;
+      font-family: 'Garamond', Georgia, serif;
+      font-size: 0.82rem;
+      color: var(--green-dark);
+      margin-bottom: 0.4rem;
+      font-style: normal;
+    }
+
+    .form-input,
+    .form-textarea {
+      width: 100%;
+      background: var(--beige-input);
+      border: none;
+      border-radius: 4px;
+      padding: 0.75rem 1rem;
+      font-family: 'Garamond', Georgia, serif;
+      font-size: 0.85rem;
+      color: var(--text);
+      outline: none;
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: #aaa;
+      font-style: normal;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 2rem;
+      margin-top: 0.4rem;
+    }
+
+    .radio-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Garamond', Georgia, serif;
+      font-size: 0.85rem;
+      color: var(--green-dark);
+      font-style: normal;
+      cursor: pointer;
+    }
+
+    .radio-label input[type="radio"] {
+      accent-color: var(--gold);
+      width: 16px;
+      height: 16px;
+    }
+
+    .btn-rsvp {
+      width: 100%;
+      background: #6A4834;
+      color: var(--white);
+      border: none;
+      padding: 1rem;
+      font-family: 'GaramondSmbd', Georgia, serif;
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-top: 1rem;
+      border-radius: 2px;
+      transition: background 0.2s;
+    }
+
+    .btn-rsvp:hover {
+      background: var(--green);
+    }
+
+    /* ===== SECTION 9: CONTACT ===== */
+    .contact {
+      padding: 4rem 2rem;
+      text-align: center;
+      background: var(--white);
+    }
+
+    .contact .section-title-script {
+      margin-bottom: 0;
+    }
+
+    .contact-subtitle {
+      font-family: 'cormorant', Georgia, serif;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 2rem;
+      margin-top: 0.2rem;
+    }
+
+    .contact-body {
+      font-family: 'Garamond', Georgia, serif;
+      font-size: 0.85rem;
+      color: var(--green);
+      line-height: 1.2;
+      font-style: normal;
+      margin-bottom: 1.5rem;
+      padding: 0 1.5rem;
+    }
+
+    .contact-detail {
+      font-family: 'GaramondSmbd', Georgia, serif;
+      font-size: 0.82rem;
+      color: var(--green-dark);
+      line-height: 2.2;
+      letter-spacing: 0.5px;
+    }
+
+    .contact-flower {
+      width: 100%;
+      display: block;
+      margin: 2.5rem auto 0;
+      opacity: 0.85;
+    }
+
+    /* ===== SCROLL REVEAL ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 {
+      transition-delay: 0.15s;
+    }
+
+    .reveal-delay-2 {
+      transition-delay: 0.3s;
+    }
+
+    .reveal-delay-3 {
+      transition-delay: 0.45s;
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .section-divider {
+      display: none;
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- ===== VIDEO INTRO ===== -->
-<div id="curtain-intro">
-  <video id="intro-video" autoplay muted playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
-    <source src="assets/anlamretreat/intro.mp4" type="video/mp4"/>
-  </video>
-</div>
+  <!-- ===== VIDEO INTRO ===== -->
+  <div id="curtain-intro">
+    <video id="intro-video" autoplay muted playsinline
+      style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+      <source src="assets/anlamretreat/intro.mp4" type="video/mp4" />
+    </video>
+  </div>
 
-<!-- ===== PETAL CANVAS ===== -->
-<canvas id="petalCanvas"></canvas>
+  <!-- ===== PETAL CANVAS ===== -->
+  <canvas id="petalCanvas"></canvas>
 
-<!-- ===== SECTION 1: HERO ===== -->
-<section class="hero">
-  <div class="hero-cloud-wrap">
-    <img src="assets/anlamretreat/converted_image_2.png" alt="clouds"/>
-    <div class="hero-top reveal">
-      <p class="hero-eyebrow reveal">We Are Getting Married</p>
-      <img src="assets/anlamretreat/yentv.png" alt="Yen & Tịnh Vân" class="reveal reveal-delay-1" style="max-width:85%;display:block;margin:0 auto 1.2rem;"/>
-      <div class="hero-date reveal reveal-delay-2">
-        <span class="hero-date-august">August</span> <span class="hero-date-numbers">08, 2026</span><br/>
-  AN LAM RETREAT SAIGON RIVER
-</div>
-<div class="hero-venue reveal reveal-delay-2">Venue: Saigon River House</div>
-</div>
+  <!-- ===== SECTION 1: HERO ===== -->
+  <section class="hero">
+    <div class="hero-cloud-wrap">
+      <img src="assets/anlamretreat/converted_image_2.png" alt="clouds" />
+      <div class="hero-top reveal">
+        <div class="hero-content-group">
+          <p class="hero-eyebrow reveal">We Are Getting Married</p>
+          <div class="hero-middle-group">
+            <img src="assets/anlamretreat/yentv.png" alt="Yen & Tịnh Vân" class="reveal reveal-delay-1"
+              style="max-width:85%;display:block;margin:0 auto 1.2rem;" />
+            <div class="hero-date reveal reveal-delay-2">
+              <span class="hero-date-august">August</span> <span class="hero-date-numbers">08, 2026</span><br />
+              AN LAM RETREAT SAIGON RIVER
+            </div>
+          </div>
+        </div>
+        <div class="hero-venue reveal reveal-delay-2">Venue: Saigon River House</div>
       </div>
     </div>
-  </div>
-</section>
-
-<img src="assets/anlamretreat/nhahang.png" alt="Saigon River House" style="width:100%;display:block;"/>
-
-
-
-<!-- ===== SECTION 2: COUNTDOWN ===== -->
-<section class="countdown">
-  <img src="assets/anlamretreat/logo2.png" alt="Yen & Tịnh Vân" class="reveal" style="max-width:30%;display:block;margin:0 auto 0.5rem;"/>
-  <h2 class="section-title-script reveal reveal-delay-1" style="font-size:clamp(1.8rem,6vw,2.5rem)">Countdown</h2>
-  <p class="countdown-desc reveal reveal-delay-2">
-    Surrounded by lush greenery and river reflections, our wedding will take place in an
-    intimate, secluded setting just beyond the city. A place to slow down, to be present,
-    and to celebrate together.
-  </p>
-  <div class="countdown-wrap reveal reveal-delay-3">
-    <div class="cd-box"><span class="cd-num" id="cd-days">00</span><span class="cd-label">Days</span></div>
-    <div class="cd-box"><span class="cd-num" id="cd-hours">00</span><span class="cd-label">Hours</span></div>
-    <div class="cd-box"><span class="cd-num" id="cd-mins">00</span><span class="cd-label">Minutes</span></div>
-    <div class="cd-box"><span class="cd-num" id="cd-secs">00</span><span class="cd-label">Seconds</span></div>
-  </div>
-</section>
-
-
-
-<!-- ===== SECTION 3: ORDER OF THE DAY ===== -->
-<section class="order">
-  <img class="order-flower-left" src="assets/anlamretreat/flower4_low.png" alt=""/>
-  <img class="order-flower-right" src="assets/anlamretreat/flower4_low.png" alt=""/>
-  <h2 class="section-title-script reveal">Order of the Day</h2>
-  <p class="order-subtitle reveal reveal-delay-1">What We Have Planned For You</p>
-  <div class="timeline reveal reveal-delay-2">
-    <div class="timeline-item">
-      <div class="timeline-time">15:30</div>
-      <div class="timeline-event">Guest Reception</div>
-      <div class="timeline-desc">Welcoming Our Beloved Guests</div>
     </div>
-    <div class="timeline-connector"></div>
-    <div class="timeline-item">
-      <div class="timeline-time">16:00</div>
-      <div class="timeline-event">Vows Ceremony</div>
-      <div class="timeline-desc">A Promise of Forever Begins</div>
     </div>
-    <div class="timeline-connector"></div>
-    <div class="timeline-item">
-      <div class="timeline-time">16:30</div>
-      <div class="timeline-event">Photo Time &amp; Cocktail Hours</div>
-      <div class="timeline-desc">Capture the Moments &amp; Sip the Joy</div>
-    </div>
-    <div class="timeline-connector"></div>
-    <div class="timeline-item">
-      <div class="timeline-time">18:30</div>
-      <div class="timeline-event">Reception Dinner</div>
-      <div class="timeline-desc">An Evening of Dining &amp; Celebration</div>
-    </div>
-    <div class="timeline-connector"></div>
-    <div class="timeline-item">
-      <div class="timeline-time">20:00</div>
-      <div class="timeline-event">Entertainment</div>
-      <div class="timeline-desc">Let the Celebration Come Alive</div>
-    </div>
-    <div class="timeline-connector"></div>
-    <div class="timeline-item">
-      <div class="timeline-time">21:00</div>
-      <div class="timeline-event">After Party</div>
-      <div class="timeline-desc">Keep the Party Going</div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<img src="assets/anlamretreat/boat1.png" alt="An Lam Retreat riverside illustration" style="width:100%;display:block;opacity:0.85;"/>
+  <img src="assets/anlamretreat/nhahang.png" alt="Saigon River House" style="width:100%;display:block;" />
 
 
 
-<!-- ===== SECTION 4: DRESSCODE ===== -->
-<section class="dresscode">
-  <h2 class="section-title-script reveal"style="margin-bottom: -0.25rem;">Dresscode</h2>
-  <p class="dresscode-colors reveal reveal-delay-1">Black, White, Champagne and Brown</p>
-  <img class="dresscode-people" src="assets/anlamretreat/dress1_low.png" alt="Formal attire illustration"/>
-  <p class="dresscode-formal"style="margin-bottom: 0.5rem;">Formal Attire</p>
-  <p class="dresscode-note">We kindly ask you to dress formally to join us on this very special day.</p>
-</section>
-
-
-
-<!-- ===== SECTION 5: GIFT ===== -->
-<section class="gift">
-  <h2 class="section-title-script reveal">Gift</h2>
-  <p class="gift-text reveal reveal-delay-1">Having you with us is the greatest gift.</p>
-  <p class="gift-note reveal reveal-delay-1">
-IF YOU WISH, A RED ENVELOPE FOR OUR HONEYMOON FUND WOULD BE WARMLY APPRECIATED.
-  </p>
-  <img class="gift-flower" src="assets/anlamretreat/flower6.png" alt="Gift envelope with flowers illustration"/>
-</section>
-
-
-
-<!-- ===== SECTION 5b: TRAVEL & ACCOMMODATION ===== -->
-<section class="travel">
-  <h2 class="section-title-script reveal" style="font-size:clamp(1.8rem,7vw,3.5rem); margin-bottom: 0;">Travel &amp; Accommodation</h2>
-  <p class="travel-subtitle reveal reveal-delay-1">Your Journey Means the World to Us</p>
-
-  <div class="travel-block reveal">
-    <p class="travel-heading"style="margin-bottom: 0.6rem;">Visa</p>
-    <p class="travel-body">Please check the visa requirements for your nationality via:<br/><br/>
-      <a href="https://evisa.gov.vn/" target="_blank">https://evisa.gov.vn/</a>
+  <!-- ===== SECTION 2: COUNTDOWN ===== -->
+  <section class="countdown">
+    <img src="assets/anlamretreat/logo2.png" alt="Yen & Tịnh Vân" class="reveal"
+      style="max-width:30%;display:block;margin:0 auto 0.5rem;" />
+    <h2 class="section-title-script reveal reveal-delay-1" style="font-size:clamp(1.8rem,6vw,2.5rem)">Countdown</h2>
+    <p class="countdown-desc reveal reveal-delay-2">
+      Surrounded by lush greenery and river reflections, our wedding will take place in an
+      intimate, secluded setting just beyond the city. A place to slow down, to be present,
+      and to celebrate together.
     </p>
-  </div>
-</section>
+    <div class="countdown-wrap reveal reveal-delay-3">
+      <div class="cd-box"><span class="cd-num" id="cd-days">00</span><span class="cd-label">Days</span></div>
+      <div class="cd-box"><span class="cd-num" id="cd-hours">00</span><span class="cd-label">Hours</span></div>
+      <div class="cd-box"><span class="cd-num" id="cd-mins">00</span><span class="cd-label">Minutes</span></div>
+      <div class="cd-box"><span class="cd-num" id="cd-secs">00</span><span class="cd-label">Seconds</span></div>
+    </div>
+  </section>
 
-<!-- ===== SECTION 6: TRAVEL INFO ===== -->
-<section class="travel-info">
-  <div class="travel-block reveal">
-    <p class="travel-heading"style="margin-bottom: 0.6rem;">Travel</p>
-    <p class="travel-body">
-      Getting around the city is easy with ride-hailing apps such as Grab or Xanh SM (similar to Uber).<br/><br/>
-      To get to An Lâm Retreats:<br/><br/>
-      <strong>By car:</strong><br/>
-      45–55 minutes (depending on traffic)<br/><br/>
-      <strong>By boat:</strong><br/>
-      25–35 minutes. If you'd like to arrive by speedboat, please let us know in advance.
+
+
+  <!-- ===== SECTION 3: ORDER OF THE DAY ===== -->
+  <section class="order">
+    <img class="order-flower-left" src="assets/anlamretreat/flower4_low.png" alt="" />
+    <img class="order-flower-right" src="assets/anlamretreat/flower4_low.png" alt="" />
+    <h2 class="section-title-script reveal">Order of the Day</h2>
+    <p class="order-subtitle reveal reveal-delay-1">What We Have Planned For You</p>
+    <div class="timeline reveal reveal-delay-2">
+      <div class="timeline-item">
+        <div class="timeline-time">15:30</div>
+        <div class="timeline-event">Guest Reception</div>
+        <div class="timeline-desc">Welcoming Our Beloved Guests</div>
+      </div>
+      <div class="timeline-connector"></div>
+      <div class="timeline-item">
+        <div class="timeline-time">16:00</div>
+        <div class="timeline-event">Vows Ceremony</div>
+        <div class="timeline-desc">A Promise of Forever Begins</div>
+      </div>
+      <div class="timeline-connector"></div>
+      <div class="timeline-item">
+        <div class="timeline-time">16:30</div>
+        <div class="timeline-event">Photo Time &amp; Cocktail Hours</div>
+        <div class="timeline-desc">Capture the Moments &amp; Sip the Joy</div>
+      </div>
+      <div class="timeline-connector"></div>
+      <div class="timeline-item">
+        <div class="timeline-time">18:30</div>
+        <div class="timeline-event">Reception Dinner</div>
+        <div class="timeline-desc">An Evening of Dining &amp; Celebration</div>
+      </div>
+      <div class="timeline-connector"></div>
+      <div class="timeline-item">
+        <div class="timeline-time">20:00</div>
+        <div class="timeline-event">Entertainment</div>
+        <div class="timeline-desc">Let the Celebration Come Alive</div>
+      </div>
+      <div class="timeline-connector"></div>
+      <div class="timeline-item">
+        <div class="timeline-time">21:00</div>
+        <div class="timeline-event">After Party</div>
+        <div class="timeline-desc">Keep the Party Going</div>
+      </div>
+    </div>
+  </section>
+
+  <img src="assets/anlamretreat/boat1.png" alt="An Lam Retreat riverside illustration"
+    style="width:100%;display:block;opacity:0.85;" />
+
+
+
+  <!-- ===== SECTION 4: DRESSCODE ===== -->
+  <section class="dresscode">
+    <h2 class="section-title-script reveal" style="margin-bottom: -0.25rem;">Dresscode</h2>
+    <p class="dresscode-colors reveal reveal-delay-1">Black, White, Champagne and Brown</p>
+    <img class="dresscode-people" src="assets/anlamretreat/dress1_low.png" alt="Formal attire illustration" />
+    <p class="dresscode-formal" style="margin-bottom: 0.5rem;">Formal Attire</p>
+    <p class="dresscode-note">We kindly ask you to dress formally to join us on this very special day.</p>
+  </section>
+
+
+
+  <!-- ===== SECTION 5: GIFT ===== -->
+  <section class="gift">
+    <h2 class="section-title-script reveal">Gift</h2>
+    <p class="gift-text reveal reveal-delay-1">Having you with us is the greatest gift.</p>
+    <p class="gift-note reveal reveal-delay-1">
+      IF YOU WISH, A RED ENVELOPE FOR OUR HONEYMOON FUND WOULD BE WARMLY APPRECIATED.
     </p>
-  </div>
-
-<div class="travel-block">
-  <p class="travel-heading"style="margin-bottom: 0.6rem;">Weather</p>
-  <p class="travel-body" style="margin-bottom: 0;">Warm, tropical, with passing rain.</p>
-  <img class="weather-img" src="assets/anlamretreat/weather1.png" alt="Tropical weather illustration"/>
-</div>
-
-  <div class="travel-block">
-    <p class="travel-heading"style="margin-bottom: 0.6rem;">Data &amp; Connectivity</p>
-    <p class="travel-body">Local SIM cards are available at the airport. eSIMs are also a convenient option, we recommend purchasing one in advance via Klook.</p>
-  </div>
-
-  <div class="travel-block">
-    <p class="travel-heading"style="margin-bottom: 0.6rem;">Hotel Recommendation</p>
-    <p class="travel-body">For your convenience, we recommend booking a room at An Lâm on
-the day of the event. Prior to that, please feel free to choose from a range
-of hotels in District 1</p>
-  </div>
-</section>
-
-<!-- ===== SECTION 7: HOTELS & CITY GUIDE ===== -->
-<section class="hotels">
-  <div class="hotels-grid">
-    <div class="hotel-item">
-      <img src="assets/anlamretreat/hotel1_low.png" alt="Lotte Hotel"/>
-      <p class="hotel-name">Lotte Hotel</p>
-    </div>
-    <div class="hotel-item">
-      <img src="assets/anlamretreat/hotel2_low.png" alt="M Village Hotel Collection"/>
-      <p class="hotel-name">M Village<br/>Hotel Collection</p>
-    </div>
-    <div class="hotel-item">
-      <img src="assets/anlamretreat/hotel3_low.png" alt="Mai House Saigon Hotel"/>
-      <p class="hotel-name">Mai House<br/>Saigon Hotel</p>
-    </div>
-  </div>
-</section>
-
-<section class="city-guide">
-  <p class="city-guide-title reveal">Ho Chi Minh City Guide</p>
-  <div class="guide-list">
-    <div class="guide-category reveal">
-      <p class="guide-cat-title">Places to visit:</p>
-      <ul class="guide-sub-list">
-        <li>Book Street</li>
-        <li>Ben Thanh Market</li>
-        <li>Water Puppet Show</li>
-        <li>The Independence Palace</li>
-        <li>The War Remnants Museum</li>
-      </ul>
-    </div>
-    <div class="guide-category reveal">
-      <p class="guide-cat-title">Where to shop:</p>
-      <ul class="guide-sub-list">
-        <li>The New Playground</li>
-        <li>Thao Dien Ward</li>
-        <li>Shopping malls (Takashimaya, Vincom, Thisky Hall,...)</li>
-      </ul>
-    </div>
-    <div class="guide-category reveal">
-      <p class="guide-cat-title">Must-try dishes:</p>
-      <ul class="guide-sub-list">
-        <li>Như ốc</li>
-        <li>Pizza 4P</li>
-        <li>Phở Hòa Pasteur</li>
-        <li>Bánh mì Huỳnh Hoa</li>
-        <li>Ba Ghiền Broken Rice</li>
-        <li>Bún bò Huế Đông Ba</li>
-        <li>Bụi Garden Restaurant</li>
-        <li>Đu Đủ Xanh Restaurant (Vegetarian)</li>
-      </ul>
-    </div>
-    <div class="guide-category reveal">
-      <p class="guide-cat-title">The coffee culture:</p>
-      <ul class="guide-sub-list">
-        <li>The Running Bean</li>
-        <li>Katinat</li>
-        <li>Thái Yên Coffee</li>
-        <li>Cà phê trứng 3T (Egg Coffee 3T)</li>
-        <li>Cộng Coffee, Rang Rang Coffee</li>
-        <li>Multiple branches across HCMC</li>
-      </ul>
-    </div>
-  </div>
-</section>
+    <img class="gift-flower" src="assets/anlamretreat/flower6.png" alt="Gift envelope with flowers illustration" />
+  </section>
 
 
 
-<!-- ===== SECTION 8: RSVP ===== -->
-<section class="rsvp">
-  <h2 class="section-title-script reveal">RSVP</h2>
-  <p class="rsvp-subtitle reveal reveal-delay-1">We Hope You Can Make It</p>
-  <p class="rsvp-note reveal ">Kindly RSVP by June 22nd, 2026, so we can finalize our guest count.</p>
-  <form class="rsvp-form" onsubmit="submitRSVP(event)">
-    <div class="form-group">
-      <label class="form-label">What is your full name? (required)</label>
-      <input class="form-input" type="text" placeholder="Your full name" required/>
-    </div>
-    <div class="form-group">
-      <label class="form-label">How would you like to be addressed on your name tag? (required)</label>
-      <input class="form-input" type="text" placeholder="Your preferred name" required/>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Email (required)</label>
-      <input class="form-input" type="email" placeholder="Your Email" required/>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Contact number (country code, e.g +84) (required)</label>
-      <input class="form-input" type="tel" placeholder="Your number" required/>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Will you be attending? (required)</label>
-      <div class="radio-group">
-        <label class="radio-label"><input type="radio" name="attending" value="accept" checked/> Joyfully Accept</label>
-        <label class="radio-label"><input type="radio" name="attending" value="decline"/> Regretfully Decline</label>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Will you be bringing a plus one? If yes, please share their name</label>
-      <div class="radio-group" style="margin-bottom:0.6rem">
-        <label class="radio-label"><input type="radio" name="plusone" value="yes" checked/> Yes</label>
-        <label class="radio-label"><input type="radio" name="plusone" value="no"/> No</label>
-      </div>
-      <input class="form-input" type="text" placeholder="Their name"/>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Allergies or dietary requirements</label>
-      <input class="form-input" type="text" placeholder="e.g. gluten-free, lactose intolerant, ..."/>
-    </div>
-    <button class="btn-rsvp" type="submit">Send RSVP</button>
-  </form>
-  <div id="rsvp-success" style="display:none;margin-top:1.5rem;text-align:center;padding:3rem 1rem;">
-      <div style="font-family:'Sloop','Great Vibes',cursive;font-size:2.5rem;color:var(--gold);font-weight:400;margin-bottom:0.5rem;">Thank you</div>
-      <div style="width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0.8rem auto 1.2rem;"></div>
-      <p style="font-family:'Garamond',Georgia,serif;font-size:0.92rem;color:var(--green);font-style:italic;line-height:2;">
-        We have received your RSVP<br/>and are so grateful.<br/><br/>
-        We cannot wait to celebrate with you<br/>on <span style="font-family:'GaramondSmbd',Georgia,serif;color:var(--green-dark);">August 08, 2026</span>.
+  <!-- ===== SECTION 5b: TRAVEL & ACCOMMODATION ===== -->
+  <section class="travel">
+    <h2 class="section-title-script reveal" style="font-size:clamp(1.8rem,7vw,3.5rem); margin-bottom: 0;">Travel &amp;
+      Accommodation</h2>
+    <p class="travel-subtitle reveal reveal-delay-1">Your Journey Means the World to Us</p>
+
+    <div class="travel-block reveal">
+      <p class="travel-heading" style="margin-bottom: 0.6rem;">Visa</p>
+      <p class="travel-body">Please check the visa requirements for your nationality via:<br /><br />
+        <a href="https://evisa.gov.vn/" target="_blank">https://evisa.gov.vn/</a>
       </p>
-      <div style="width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:1.2rem auto 0;"></div>
-  </div>
-</section>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 6: TRAVEL INFO ===== -->
+  <section class="travel-info">
+    <div class="travel-block reveal">
+      <p class="travel-heading" style="margin-bottom: 0.6rem;">Travel</p>
+      <p class="travel-body">
+        Getting around the city is easy with ride-hailing apps such as Grab or Xanh SM (similar to Uber).<br /><br />
+        To get to An Lâm Retreats:<br /><br />
+        <strong>By car:</strong><br />
+        45–55 minutes (depending on traffic)<br /><br />
+        <strong>By boat:</strong><br />
+        25–35 minutes. If you'd like to arrive by speedboat, please let us know in advance.
+      </p>
+    </div>
+
+    <div class="travel-block">
+      <p class="travel-heading" style="margin-bottom: 0.6rem;">Weather</p>
+      <p class="travel-body" style="margin-bottom: 0;">Warm, tropical, with passing rain.</p>
+      <img class="weather-img" src="assets/anlamretreat/weather1.png" alt="Tropical weather illustration" />
+    </div>
+
+    <div class="travel-block">
+      <p class="travel-heading" style="margin-bottom: 0.6rem;">Data &amp; Connectivity</p>
+      <p class="travel-body">Local SIM cards are available at the airport. eSIMs are also a convenient option, we
+        recommend purchasing one in advance via Klook.</p>
+    </div>
+
+    <div class="travel-block">
+      <p class="travel-heading" style="margin-bottom: 0.6rem;">Hotel Recommendation</p>
+      <p class="travel-body">For your convenience, we recommend booking a room at An Lâm on
+        the day of the event. Prior to that, please feel free to choose from a range
+        of hotels in District 1</p>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 7: HOTELS & CITY GUIDE ===== -->
+  <section class="hotels">
+    <div class="hotels-grid">
+      <div class="hotel-item">
+        <img src="assets/anlamretreat/hotel1_low.png" alt="Lotte Hotel" />
+        <p class="hotel-name">Lotte Hotel</p>
+      </div>
+      <div class="hotel-item">
+        <img src="assets/anlamretreat/hotel2_low.png" alt="M Village Hotel Collection" />
+        <p class="hotel-name">M Village<br />Hotel Collection</p>
+      </div>
+      <div class="hotel-item">
+        <img src="assets/anlamretreat/hotel3_low.png" alt="Mai House Saigon Hotel" />
+        <p class="hotel-name">Mai House<br />Saigon Hotel</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="city-guide">
+    <p class="city-guide-title reveal">Ho Chi Minh City Guide</p>
+    <div class="guide-list">
+      <div class="guide-category reveal">
+        <p class="guide-cat-title">Places to visit:</p>
+        <ul class="guide-sub-list">
+          <li>Book Street</li>
+          <li>Ben Thanh Market</li>
+          <li>Water Puppet Show</li>
+          <li>The Independence Palace</li>
+          <li>The War Remnants Museum</li>
+        </ul>
+      </div>
+      <div class="guide-category reveal">
+        <p class="guide-cat-title">Where to shop:</p>
+        <ul class="guide-sub-list">
+          <li>The New Playground</li>
+          <li>Thao Dien Ward</li>
+          <li>Shopping malls (Takashimaya, Vincom, Thisky Hall,...)</li>
+        </ul>
+      </div>
+      <div class="guide-category reveal">
+        <p class="guide-cat-title">Must-try dishes:</p>
+        <ul class="guide-sub-list">
+          <li>Như ốc</li>
+          <li>Pizza 4P</li>
+          <li>Phở Hòa Pasteur</li>
+          <li>Bánh mì Huỳnh Hoa</li>
+          <li>Ba Ghiền Broken Rice</li>
+          <li>Bún bò Huế Đông Ba</li>
+          <li>Bụi Garden Restaurant</li>
+          <li>Đu Đủ Xanh Restaurant (Vegetarian)</li>
+        </ul>
+      </div>
+      <div class="guide-category reveal">
+        <p class="guide-cat-title">The coffee culture:</p>
+        <ul class="guide-sub-list">
+          <li>The Running Bean</li>
+          <li>Katinat</li>
+          <li>Thái Yên Coffee</li>
+          <li>Cà phê trứng 3T (Egg Coffee 3T)</li>
+          <li>Cộng Coffee, Rang Rang Coffee</li>
+          <li>Multiple branches across HCMC</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
 
 
-<!-- ===== SECTION 9: CONTACT ===== -->
-<section class="contact">
-  <h2 class="section-title-script reveal">Contact Us</h2>
-  <p class="contact-subtitle reveal reveal-delay-1">We Hope You Can Make It</p>
-  <p class="contact-body">Please reach out to our wedding planner team via Whatsapp, Zalo or email for any question:</p>
-  <p class="contact-detail">
-    Whatsapp/Zalo: +84 976787545<br/>
-    Email: duong.nguyen@theflab.co
-  </p>
-  <br/>
-  <p class="contact-body">Or you can reach to the couple by direct phone number or Whatsapp</p>
-  <p class="contact-detail">
-    TinhVan – The Bride: +886 921 069 703<br/>
-    Yen – The Groom: +886 907 521 368
-  </p>
-  <img class="contact-flower" src="assets/anlamretreat/flower5.png" alt="Flower illustration"/>
-</section>
+  <!-- ===== SECTION 8: RSVP ===== -->
+  <section class="rsvp">
+    <h2 class="section-title-script reveal">RSVP</h2>
+    <p class="rsvp-subtitle reveal reveal-delay-1">We Hope You Can Make It</p>
+    <p class="rsvp-note reveal ">Kindly RSVP by June 22nd, 2026, so we can finalize our guest count.</p>
+    <form class="rsvp-form" onsubmit="submitRSVP(event)">
+      <div class="form-group">
+        <label class="form-label">What is your full name? (required)</label>
+        <input class="form-input" type="text" placeholder="Your full name" required />
+      </div>
+      <div class="form-group">
+        <label class="form-label">How would you like to be addressed on your name tag? (required)</label>
+        <input class="form-input" type="text" placeholder="Your preferred name" required />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email (required)</label>
+        <input class="form-input" type="email" placeholder="Your Email" required />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Contact number (country code, e.g +84) (required)</label>
+        <input class="form-input" type="tel" placeholder="Your number" required />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Will you be attending? (required)</label>
+        <div class="radio-group">
+          <label class="radio-label"><input type="radio" name="attending" value="accept" checked /> Joyfully
+            Accept</label>
+          <label class="radio-label"><input type="radio" name="attending" value="decline" /> Regretfully Decline</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Will you be bringing a plus one? If yes, please share their name</label>
+        <div class="radio-group" style="margin-bottom:0.6rem">
+          <label class="radio-label"><input type="radio" name="plusone" value="yes" checked /> Yes</label>
+          <label class="radio-label"><input type="radio" name="plusone" value="no" /> No</label>
+        </div>
+        <input class="form-input" type="text" placeholder="Their name" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Allergies or dietary requirements</label>
+        <input class="form-input" type="text" placeholder="e.g. gluten-free, lactose intolerant, ..." />
+      </div>
+      <button class="btn-rsvp" type="submit">Send RSVP</button>
+    </form>
+    <div id="rsvp-success" style="display:none;margin-top:1.5rem;text-align:center;padding:3rem 1rem;">
+      <div
+        style="font-family:'Sloop','Great Vibes',cursive;font-size:2.5rem;color:var(--gold);font-weight:400;margin-bottom:0.5rem;">
+        Thank you</div>
+      <div
+        style="width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0.8rem auto 1.2rem;">
+      </div>
+      <p
+        style="font-family:'Garamond',Georgia,serif;font-size:0.92rem;color:var(--green);font-style:italic;line-height:2;">
+        We have received your RSVP<br />and are so grateful.<br /><br />
+        We cannot wait to celebrate with you<br />on <span
+          style="font-family:'GaramondSmbd',Georgia,serif;color:var(--green-dark);">August 08, 2026</span>.
+      </p>
+      <div
+        style="width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:1.2rem auto 0;">
+      </div>
+    </div>
+  </section>
 
-<script>
-// ===== SCROLL REVEAL =====
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-      revealObserver.unobserve(e.target);
+
+
+  <!-- ===== SECTION 9: CONTACT ===== -->
+  <section class="contact">
+    <h2 class="section-title-script reveal">Contact Us</h2>
+    <p class="contact-subtitle reveal reveal-delay-1">We Hope You Can Make It</p>
+    <p class="contact-body">Please reach out to our wedding planner team via Whatsapp, Zalo or email for any question:
+    </p>
+    <p class="contact-detail">
+      Whatsapp/Zalo: +84 976787545<br />
+      Email: duong.nguyen@theflab.co
+    </p>
+    <br />
+    <p class="contact-body">Or you can reach to the couple by direct phone number or Whatsapp</p>
+    <p class="contact-detail">
+      TinhVan – The Bride: +886 921 069 703<br />
+      Yen – The Groom: +886 907 521 368
+    </p>
+    <img class="contact-flower" src="assets/anlamretreat/flower5.png" alt="Flower illustration" />
+  </section>
+
+  <script>
+    // ===== SCROLL REVEAL =====
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          revealObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => revealObserver.observe(el));
+
+    // ===== VIDEO INTRO =====
+    function skipIntro() {
+      const intro = document.getElementById('curtain-intro');
+      intro.style.transition = 'opacity 0.8s ease';
+      intro.style.opacity = '0';
+      setTimeout(() => intro.style.display = 'none', 800);
     }
-  });
-}, { threshold: 0.15 });
-document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => revealObserver.observe(el));
 
-// ===== VIDEO INTRO =====
-function skipIntro() {
-  const intro = document.getElementById('curtain-intro');
-  intro.style.transition = 'opacity 0.8s ease';
-  intro.style.opacity = '0';
-  setTimeout(() => intro.style.display = 'none', 800);
-}
-
-const introVideo = document.getElementById('intro-video');
-if (introVideo) {
-  introVideo.addEventListener('ended', skipIntro);
-}
-
-// ===== CLICK EFFECT: SOFT PETALS =====
-const canvas = document.getElementById('petalCanvas');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-window.addEventListener('resize', () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
-
-const particles = [];
-
-class Petal {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
-    const angle = (Math.random() * Math.PI) - Math.PI / 2; // mostly upward
-    const speed = Math.random() * 1.5 + 0.5;
-    this.vx = Math.cos(angle) * speed * (Math.random() > 0.5 ? 1 : -1);
-    this.vy = Math.sin(angle) * speed - Math.random() * 1.5;
-    this.gravity = 0.04;
-    this.wobble = Math.random() * Math.PI * 2;
-    this.wobbleSpeed = Math.random() * 0.04 + 0.02;
-    this.rot = Math.random() * Math.PI * 2;
-    this.rotSpeed = (Math.random() - 0.5) * 0.04;
-    this.w = Math.random() * 10 + 6;
-    this.h = this.w * (Math.random() * 0.4 + 0.5);
-    this.opacity = Math.random() * 0.4 + 0.5;
-    this.fade = Math.random() * 0.008 + 0.005;
-    // Soft petal colors: ivory, blush, pink, champagne
-    const colors = [
-      `rgba(245,235,220,`,
-      `rgba(240,200,210,`,
-      `rgba(235,170,185,`,
-      `rgba(250,210,220,`,
-      `rgba(255,192,203,`,
-      `rgba(220,180,190,`,
-    ];
-    this.color = colors[Math.floor(Math.random() * colors.length)];
-  }
-  update() {
-    this.wobble += this.wobbleSpeed;
-    this.x += this.vx + Math.sin(this.wobble) * 0.5;
-    this.y += this.vy;
-    this.vy += this.gravity;
-    this.rot += this.rotSpeed;
-    this.opacity -= this.fade;
-  }
-  draw() {
-    if (this.opacity <= 0) return;
-    ctx.save();
-    ctx.translate(this.x, this.y);
-    ctx.rotate(this.rot);
-    ctx.globalAlpha = this.opacity;
-    const s = this.w / 2;
-    // Draw 5-petal flower shape
-    ctx.beginPath();
-    for (let i = 0; i < 5; i++) {
-      const a = (i / 5) * Math.PI * 2 - Math.PI / 2;
-      const bx = Math.cos(a) * s;
-      const by = Math.sin(a) * s;
-      const cp1x = Math.cos(a - 0.4) * s * 1.3;
-      const cp1y = Math.sin(a - 0.4) * s * 1.3;
-      const cp2x = Math.cos(a + 0.4) * s * 1.3;
-      const cp2y = Math.sin(a + 0.4) * s * 1.3;
-      if (i === 0) ctx.moveTo(bx, by);
-      const na = ((i + 1) / 5) * Math.PI * 2 - Math.PI / 2;
-      const nx = Math.cos(na) * s;
-      const ny = Math.sin(na) * s;
-      ctx.bezierCurveTo(cp2x, cp2y, Math.cos(na - 0.4) * s * 1.3, Math.sin(na - 0.4) * s * 1.3, nx, ny);
+    const introVideo = document.getElementById('intro-video');
+    if (introVideo) {
+      introVideo.addEventListener('ended', skipIntro);
     }
-    ctx.closePath();
-    const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, s * 1.3);
-    grad.addColorStop(0, `rgba(255,255,255,${this.opacity * 0.9})`);
-    grad.addColorStop(0.4, this.color + (this.opacity * 0.85) + ')');
-    grad.addColorStop(1, this.color + (this.opacity * 0.3) + ')');
-    ctx.fillStyle = grad;
-    ctx.fill();
-    ctx.restore();
-  }
-  get done() { return this.opacity <= 0; }
-}
 
-document.addEventListener('click', (e) => {
-  const count = 10 + Math.floor(Math.random() * 6);
-  for (let i = 0; i < count; i++) {
-    setTimeout(() => particles.push(new Petal(
-      e.clientX + (Math.random() - 0.5) * 20,
-      e.clientY + (Math.random() - 0.5) * 20
-    )), i * 30);
-  }
-});
+    // ===== CLICK EFFECT: SOFT PETALS =====
+    const canvas = document.getElementById('petalCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
 
-function animateParticles() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  for (let i = particles.length - 1; i >= 0; i--) {
-    particles[i].update();
-    particles[i].draw();
-    if (particles[i].done) particles.splice(i, 1);
-  }
-  requestAnimationFrame(animateParticles);
-}
-animateParticles();
-const weddingDate = new Date('2026-08-08T15:30:00');
-function tick() {
-  const diff = weddingDate - new Date();
-  if (diff <= 0) {
-    document.getElementById('cd-days').textContent = '00';
-    document.getElementById('cd-hours').textContent = '00';
-    document.getElementById('cd-mins').textContent = '00';
-    document.getElementById('cd-secs').textContent = '00';
-    return;
-  }
-  const d = Math.floor(diff / 86400000);
-  const h = Math.floor((diff % 86400000) / 3600000);
-  const m = Math.floor((diff % 3600000) / 60000);
-  const s = Math.floor((diff % 60000) / 1000);
-  document.getElementById('cd-days').textContent = String(d).padStart(2, '0');
-  document.getElementById('cd-hours').textContent = String(h).padStart(2, '0');
-  document.getElementById('cd-mins').textContent = String(m).padStart(2, '0');
-  document.getElementById('cd-secs').textContent = String(s).padStart(2, '0');
-}
-tick();
-setInterval(tick, 1000);
+    const particles = [];
 
-function submitRSVP(e) {
-  e.preventDefault();
-  const form = e.target;
-  const btn = form.querySelector('.btn-rsvp');
-  btn.textContent = 'Sending...';
-  btn.disabled = true;
+    class Petal {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        const angle = (Math.random() * Math.PI) - Math.PI / 2; // mostly upward
+        const speed = Math.random() * 1.5 + 0.5;
+        this.vx = Math.cos(angle) * speed * (Math.random() > 0.5 ? 1 : -1);
+        this.vy = Math.sin(angle) * speed - Math.random() * 1.5;
+        this.gravity = 0.04;
+        this.wobble = Math.random() * Math.PI * 2;
+        this.wobbleSpeed = Math.random() * 0.04 + 0.02;
+        this.rot = Math.random() * Math.PI * 2;
+        this.rotSpeed = (Math.random() - 0.5) * 0.04;
+        this.w = Math.random() * 10 + 6;
+        this.h = this.w * (Math.random() * 0.4 + 0.5);
+        this.opacity = Math.random() * 0.4 + 0.5;
+        this.fade = Math.random() * 0.008 + 0.005;
+        // Soft petal colors: ivory, blush, pink, champagne
+        const colors = [
+          `rgba(245,235,220,`,
+          `rgba(240,200,210,`,
+          `rgba(235,170,185,`,
+          `rgba(250,210,220,`,
+          `rgba(255,192,203,`,
+          `rgba(220,180,190,`,
+        ];
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+      }
+      update() {
+        this.wobble += this.wobbleSpeed;
+        this.x += this.vx + Math.sin(this.wobble) * 0.5;
+        this.y += this.vy;
+        this.vy += this.gravity;
+        this.rot += this.rotSpeed;
+        this.opacity -= this.fade;
+      }
+      draw() {
+        if (this.opacity <= 0) return;
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rot);
+        ctx.globalAlpha = this.opacity;
+        const s = this.w / 2;
+        // Draw 5-petal flower shape
+        ctx.beginPath();
+        for (let i = 0; i < 5; i++) {
+          const a = (i / 5) * Math.PI * 2 - Math.PI / 2;
+          const bx = Math.cos(a) * s;
+          const by = Math.sin(a) * s;
+          const cp1x = Math.cos(a - 0.4) * s * 1.3;
+          const cp1y = Math.sin(a - 0.4) * s * 1.3;
+          const cp2x = Math.cos(a + 0.4) * s * 1.3;
+          const cp2y = Math.sin(a + 0.4) * s * 1.3;
+          if (i === 0) ctx.moveTo(bx, by);
+          const na = ((i + 1) / 5) * Math.PI * 2 - Math.PI / 2;
+          const nx = Math.cos(na) * s;
+          const ny = Math.sin(na) * s;
+          ctx.bezierCurveTo(cp2x, cp2y, Math.cos(na - 0.4) * s * 1.3, Math.sin(na - 0.4) * s * 1.3, nx, ny);
+        }
+        ctx.closePath();
+        const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, s * 1.3);
+        grad.addColorStop(0, `rgba(255,255,255,${this.opacity * 0.9})`);
+        grad.addColorStop(0.4, this.color + (this.opacity * 0.85) + ')');
+        grad.addColorStop(1, this.color + (this.opacity * 0.3) + ')');
+        ctx.fillStyle = grad;
+        ctx.fill();
+        ctx.restore();
+      }
+      get done() { return this.opacity <= 0; }
+    }
 
-  const data = {
-    fullName: form.querySelector('input[placeholder="Your full name"]').value,
-    preferredName: form.querySelector('input[placeholder="Your preferred name"]').value,
-    email: form.querySelector('input[type="email"]').value,
-    phone: form.querySelector('input[type="tel"]').value,
-    attending: form.querySelector('input[name="attending"]:checked').value,
-    plusOne: form.querySelector('input[name="plusone"]:checked').value,
-    plusOneName: form.querySelector('input[placeholder="Their name"]').value,
-    dietary: form.querySelector('input[placeholder="e.g. gluten-free, lactose intolerant, ..."]').value
-  };
+    document.addEventListener('click', (e) => {
+      const count = 10 + Math.floor(Math.random() * 6);
+      for (let i = 0; i < count; i++) {
+        setTimeout(() => particles.push(new Petal(
+          e.clientX + (Math.random() - 0.5) * 20,
+          e.clientY + (Math.random() - 0.5) * 20
+        )), i * 30);
+      }
+    });
 
-  fetch('https://script.google.com/macros/s/AKfycbw6zG7_nPrTi2Ur5m7VM6rUAkmfJzHh-z_jsfV3PAafgjlxYmLwEBcEbZSgUzmW7Znn/exec', {
-    method: 'POST',
-    mode: 'no-cors',
-    body: new URLSearchParams(data)
-  });
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = particles.length - 1; i >= 0; i--) {
+        particles[i].update();
+        particles[i].draw();
+        if (particles[i].done) particles.splice(i, 1);
+      }
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+    const weddingDate = new Date('2026-08-08T15:30:00');
+    function tick() {
+      const diff = weddingDate - new Date();
+      if (diff <= 0) {
+        document.getElementById('cd-days').textContent = '00';
+        document.getElementById('cd-hours').textContent = '00';
+        document.getElementById('cd-mins').textContent = '00';
+        document.getElementById('cd-secs').textContent = '00';
+        return;
+      }
+      const d = Math.floor(diff / 86400000);
+      const h = Math.floor((diff % 86400000) / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      document.getElementById('cd-days').textContent = String(d).padStart(2, '0');
+      document.getElementById('cd-hours').textContent = String(h).padStart(2, '0');
+      document.getElementById('cd-mins').textContent = String(m).padStart(2, '0');
+      document.getElementById('cd-secs').textContent = String(s).padStart(2, '0');
+    }
+    tick();
+    setInterval(tick, 1000);
 
-  // Show success after short delay regardless of response
-  setTimeout(() => {
-    btn.textContent = 'Send RSVP';
-    btn.disabled = false;
-    form.style.transition = 'opacity 0.6s ease';
-    form.style.opacity = '0';
-    setTimeout(() => {
-      form.style.display = 'none';
-      const success = document.getElementById('rsvp-success');
-      success.style.display = 'block';
-      success.style.opacity = '0';
-      success.style.transition = 'opacity 0.8s ease';
-      setTimeout(() => success.style.opacity = '1', 50);
-    }, 600);
-  }, 1000);
-}
-</script>
+    function submitRSVP(e) {
+      e.preventDefault();
+      const form = e.target;
+      const btn = form.querySelector('.btn-rsvp');
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+
+      const data = {
+        fullName: form.querySelector('input[placeholder="Your full name"]').value,
+        preferredName: form.querySelector('input[placeholder="Your preferred name"]').value,
+        email: form.querySelector('input[type="email"]').value,
+        phone: form.querySelector('input[type="tel"]').value,
+        attending: form.querySelector('input[name="attending"]:checked').value,
+        plusOne: form.querySelector('input[name="plusone"]:checked').value,
+        plusOneName: form.querySelector('input[placeholder="Their name"]').value,
+        dietary: form.querySelector('input[placeholder="e.g. gluten-free, lactose intolerant, ..."]').value
+      };
+
+      fetch('https://script.google.com/macros/s/AKfycbw6zG7_nPrTi2Ur5m7VM6rUAkmfJzHh-z_jsfV3PAafgjlxYmLwEBcEbZSgUzmW7Znn/exec', {
+        method: 'POST',
+        mode: 'no-cors',
+        body: new URLSearchParams(data)
+      });
+
+      // Show success after short delay regardless of response
+      setTimeout(() => {
+        btn.textContent = 'Send RSVP';
+        btn.disabled = false;
+        form.style.transition = 'opacity 0.6s ease';
+        form.style.opacity = '0';
+        setTimeout(() => {
+          form.style.display = 'none';
+          const success = document.getElementById('rsvp-success');
+          success.style.display = 'block';
+          success.style.opacity = '0';
+          success.style.transition = 'opacity 0.8s ease';
+          setTimeout(() => success.style.opacity = '1', 50);
+        }, 600);
+      }, 1000);
+    }
+  </script>
 </body>
+
 </html>
-
-
