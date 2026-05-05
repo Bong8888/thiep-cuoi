@@ -339,7 +339,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-end;
-      padding: 2rem 2rem 2rem;
+      padding: 2rem 2rem 4rem;
       z-index: 2;
     }
 
@@ -1171,6 +1171,34 @@
     .section-divider {
       display: none;
     }
+
+  @media (max-width: 768px) { 
+    .hero {
+      margin-top: 3.75rem;
+    }
+  
+    .hero-top {
+      justify-content: flex-start; 
+      padding-top: 6.25rem;
+    }
+
+    .hero-eyebrow {
+      margin-top: 0;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-middle-group {
+      margin-top: 0;
+    }
+
+    .hero-top img {
+      margin: 1.7rem auto !important;
+    }
+
+    .hero-venue {
+        margin-top: 2.5rem;
+    }
+  }
   </style>
 </head>
 
