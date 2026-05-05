@@ -316,7 +316,7 @@
       font-weight: 500;
       font-size: 0.5rem;
       color: var(--green);
-      margin-top: 1.3rem;
+      margin: auto 0;
       letter-spacing: 0.75px;
       text-transform: uppercase;
     }
@@ -465,7 +465,7 @@
         display: flex;
         flex-direction: column;
         gap: 2.5rem;
-        margin-top: 4.7rem;
+        margin-top: 2.7rem;
       }
 
 
@@ -538,7 +538,6 @@
       font-weight: 400;
       font-style: normal;
       color: #6A4834;
-      margin-bottom: 0.8rem;
     }
 
     .countdown-desc {
@@ -588,12 +587,6 @@
       background: var(--white);
       position: relative;
       overflow: hidden;
-    }
-
-    @media (min-width: 768px) {
-      .order-subtitle {
-        margin-top: -1.5rem;
-      }
     }
 
     .order-subtitle {
@@ -1172,33 +1165,178 @@
       display: none;
     }
 
-  @media (max-width: 768px) { 
-    .hero {
-      margin-top: 3.75rem;
-    }
-  
-    .hero-top {
-      justify-content: flex-start; 
-      padding-top: 6.25rem;
+    .hotel-item a {
+      text-decoration: none;
+      color: inherit;
     }
 
-    .hero-eyebrow {
-      margin-top: 0;
-      margin-bottom: 0.8rem;
-    }
+/* =======================
+   MOBILE (default)
+======================= */
+@media (max-width: 768px) {
 
-    .hero-middle-group {
-      margin-top: 0;
-    }
-
-    .hero-top img {
-      margin: 1.7rem auto !important;
-    }
-
-    .hero-venue {
-        margin-top: 2.5rem;
-    }
+  .hero {
+    margin-top: 3.75rem;
   }
+
+  .hero-top {
+    justify-content: flex-start;
+    padding-top: 6.25rem;
+    gap: 2rem;
+  }
+
+  .hero-eyebrow {
+    margin-top: 0;
+    margin-bottom: 0.8rem;
+  }
+
+  .hero-middle-group {
+    margin-top: 0;
+    flex-grow: 1;
+  }
+
+  .hero-top img {
+    margin: 1.7rem auto !important;
+  }
+
+  .hero-venue {
+    margin: 0;
+  }
+
+  .countdown-desc {
+    font-size: 0.62rem;
+  }
+
+  /* Titles */
+  .order .section-title-script,
+  .dresscode .section-title-script,
+  .gift .section-title-script,
+  .rsvp .section-title-script,
+  .travel .section-title-script,
+  .contact .section-title-script {
+    font-size: clamp(1.8rem, 6vw, 2.5rem);
+  }
+
+  .order-subtitle {
+    font-size: 0.7rem;
+    letter-spacing: 0.5px;
+    margin-top: 0 !important;
+  }
+
+  .timeline-time {
+    font-size: 0.72rem;
+  }
+
+  .order {
+    padding: 1rem 2rem;
+  }
+
+  .boat-image {
+    margin-bottom: 7rem;
+  }
+
+  .dresscode-colors,
+  .dresscode-formal {
+    font-size: 0.85rem;
+  }
+
+  .dresscode-colors {
+    margin-top: 0.3rem;
+    letter-spacing: 0.5px;
+  }
+
+  .gift {
+    padding: 1.5rem;
+  }
+
+  .gift-text {
+    margin: 0.5rem auto 0;
+  }
+
+  .gift-note {
+    letter-spacing: 0.3px;
+    word-spacing: 0.5px;
+  }
+
+  .travel {
+    padding: 2rem 2rem 0;
+  }
+
+  .travel-body {
+    margin-bottom: 3rem;
+  }
+
+  .travel-info {
+    margin-top: 2.5rem;
+    padding: 0 2rem;
+  }
+
+  .weather-img {
+    margin: 0 auto 2rem;
+  }
+}
+
+
+/* =======================
+   DESKTOP (>= 768px)
+======================= */
+@media (min-width: 768px) {
+
+  .cd-num {
+    font-size: 3rem;
+  }
+
+  .cd-label {
+    font-size: 0.75rem;
+  }
+
+  .hero-middle-group {
+    margin-top: 2.7rem;
+  }
+
+  /* Titles (desktop giữ cố định) */
+  .order .section-title-script,
+  .dresscode .section-title-script,
+  .gift .section-title-script,
+  .rsvp .section-title-script,
+  .travel .section-title-script,
+  .contact .section-title-script {
+    font-size: clamp(1.8rem, 6vw, 2.5rem);
+  }
+
+  .order-subtitle {
+    font-size: 0.7rem;
+    letter-spacing: 0.5px;
+    margin-top: 0 !important;
+  }
+
+  .order {
+    padding: 1rem 2rem;
+  }
+
+  .dresscode-colors,
+  .dresscode-formal {
+    font-size: 0.85rem;
+  }
+
+  .boat-image {
+    margin-bottom: 7rem;
+  }
+
+  .gift {
+    padding: 1.5rem;
+  }
+
+  .gift-text {
+    margin: 0.5rem auto 0;
+  }
+
+  .gift-note {
+    letter-spacing: 0.3px;
+    word-spacing: 0.5px;
+  }
+}
+
   </style>
 </head>
 
@@ -1307,7 +1445,7 @@
     </div>
   </section>
 
-  <img src="assets/anlamretreat/boat1.png" alt="An Lam Retreat riverside illustration"
+  <img class="boat-image" src="assets/anlamretreat/boat1.png" alt="An Lam Retreat riverside illustration"
     style="width:100%;display:block;opacity:0.85;" />
 
 
@@ -1337,7 +1475,7 @@
 
   <!-- ===== SECTION 5b: TRAVEL & ACCOMMODATION ===== -->
   <section class="travel">
-    <h2 class="section-title-script reveal" style="font-size:clamp(1.8rem,7vw,3.5rem); margin-bottom: 0;">Travel &amp;
+    <h2 class="section-title-script reveal" margin-bottom: 0;">Travel &amp;
       Accommodation</h2>
     <p class="travel-subtitle reveal reveal-delay-1">Your Journey Means the World to Us</p>
 
@@ -1359,11 +1497,12 @@
         <strong>By car:</strong><br />
         45–55 minutes (depending on traffic)<br /><br />
         <strong>By boat:</strong><br />
-        25–35 minutes. If you'd like to arrive by speedboat, please let us know in advance.
+        25–35 minutes. If you'd like to arrive by speedboat,<br />
+        please let us know in advance.
       </p>
     </div>
 
-    <div class="travel-block">
+    <div class="travel-block" style="margin-top: 7rem;">
       <p class="travel-heading" style="margin-bottom: 0.6rem;">Weather</p>
       <p class="travel-body" style="margin-bottom: 0;">Warm, tropical, with passing rain.</p>
       <img class="weather-img" src="assets/anlamretreat/weather1.png" alt="Tropical weather illustration" />
@@ -1387,16 +1526,22 @@
   <section class="hotels">
     <div class="hotels-grid">
       <div class="hotel-item">
-        <img src="assets/anlamretreat/hotel1_low.png" alt="Lotte Hotel" />
-        <p class="hotel-name">Lotte Hotel</p>
+          <a href="https://www.lottehotel.com/saigon-hotel/en" target="_blank">
+            <img src="assets/anlamretreat/hotel1_low.png" alt="Lotte Hotel" />
+            <p class="hotel-name">Lotte Hotel</p>
+          </a>
       </div>
       <div class="hotel-item">
-        <img src="assets/anlamretreat/hotel2_low.png" alt="M Village Hotel Collection" />
-        <p class="hotel-name">M Village<br />Hotel Collection</p>
+         <a href="https://mvillage.vn/vi/" target="_blank">
+          <img src="assets/anlamretreat/hotel2_low.png" alt="M Village Hotel Collection" />
+          <p class="hotel-name">M Village<br />Hotel Collection</p>
+         </a>
       </div>
       <div class="hotel-item">
-        <img src="assets/anlamretreat/hotel3_low.png" alt="Mai House Saigon Hotel" />
-        <p class="hotel-name">Mai House<br />Saigon Hotel</p>
+         <a href="https://maihouse.com.vn/?view=vi" target="_blank">
+          <img src="assets/anlamretreat/hotel3_low.png" alt="Mai House Saigon Hotel" />
+          <p class="hotel-name">Mai House<br />Saigon Hotel</p>
+         </a>
       </div>
     </div>
   </section>
@@ -1419,7 +1564,7 @@
         <ul class="guide-sub-list">
           <li>The New Playground</li>
           <li>Thao Dien Ward</li>
-          <li>Shopping malls (Takashimaya, Vincom, Thisky Hall,...)</li>
+          <li>Shopping malls (Takashimaya, Vincom,...)</li>
         </ul>
       </div>
       <div class="guide-category reveal">
@@ -1643,6 +1788,7 @@
       get done() { return this.opacity <= 0; }
     }
 
+    /* COMMENTED: Petal animation
     document.addEventListener('click', (e) => {
       const count = 10 + Math.floor(Math.random() * 6);
       for (let i = 0; i < count; i++) {
@@ -1652,6 +1798,7 @@
         )), i * 30);
       }
     });
+    */
 
     function animateParticles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
